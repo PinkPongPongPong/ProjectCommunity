@@ -6,19 +6,18 @@ import java.sql.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
+@Builder
 @Getter
 @ToString
-public class BoardDTO {
+public class BoardDTO{
 
-    private String post_Id;
-    private String user_NickName;
-    private String post_Title;
-    private Date category_Date;
-    private int views;
-    private int like;
-    private String division;
-    private int hate;
+    private int BoardNo;
+    private Date BoardDate;
+    private int BoardCount;
+    private int BoardUpvoteCount;
+    private String BoardTitle;
+    private String BoardDetail;
+
 
 
 }
