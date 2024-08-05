@@ -1,4 +1,5 @@
 package com.ohgiraffers.projectgin.model.entity;
 
-public class User {
+public enum RoleType {
+    USER,ADMIN
 }
