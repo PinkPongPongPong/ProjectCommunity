@@ -19,5 +19,4 @@ public class BoardDTO{
     private String BoardDetail;
 
 
-
 }

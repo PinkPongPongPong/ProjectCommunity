@@ -38,7 +38,7 @@ public class Board {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_no")
-    private User user;
+    private UserEntity user;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name = "board_category", nullable = false)
