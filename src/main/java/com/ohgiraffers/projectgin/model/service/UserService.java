@@ -27,7 +27,7 @@ public class UserService {
                 .name(signupDTO.getName())
                 .phone(signupDTO.getPhone())
                 .email(signupDTO.getEmail())
-                .regDate(signupDTO.getRegDate())
+                .regDate(LocalDate.now())
                 .role(RoleType.valueOf(signupDTO.getRole())) // user.admin
                 .build();
         UserEntity savedUser = userRepository.save(userEntity);
