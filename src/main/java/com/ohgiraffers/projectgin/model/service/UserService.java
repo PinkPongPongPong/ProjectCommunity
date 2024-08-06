@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -18,14 +20,18 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     public void register(UserSignupDTO signupDTO) {
-        UserEntity user = UserEntity.builder()
-                .userId(signupDTO.getUserId())
+        UserEntity userEntity = UserEntity.builder()
+                .user_id(signupDTO.getUser_id())
+                .nick_name(signupDTO.getNick_name())
                 .password(passwordEncoder.encode(signupDTO.getPassword())) // 암호화
                 .name(signupDTO.getName())
+                .phone(signupDTO.getPhone())
+                .email(signupDTO.getEmail())
+                .reg_date(signupDTO.getReg_date())
                 .role(RoleType.valueOf(signupDTO.getRole())) // user.admin
                 .build();
-        UserEntity savedUser = userRepository.save(user);
-        log.info("저장된 회원 정보 : {}", savedUser.getUserNo());
+        UserEntity savedUser = userRepository.save(userEntity);
+        log.info("저장된 회원 정보 : {}", savedUser.getUser_no());
     }
 }
 

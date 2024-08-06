@@ -1,15 +1,12 @@
 package com.ohgiraffers.projectgin.model.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "tbl_member")
+@Table(name = "tbl_user")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -17,16 +14,16 @@ import java.time.LocalDate;
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userNo;
-    private String userId;
+    private int user_no;
+    private String user_id;
     private String password;
-    private String nickName;
+    private String nick_name;
     private String name;
     private String phone;
     private String email;
-    private LocalDate regDate;
-    private LocalDate susDate;
-    private int susCount;
+    private LocalDate reg_date;
+    private LocalDate sus_date;
+    private int sus_count;
     @Enumerated(EnumType.STRING)
     private RoleType role;
 }

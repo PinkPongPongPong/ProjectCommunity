@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>signup</h1>
-<form th:action="@{/member/register}" th:method="post">
+<form th:action="@{/user/register}" th:method="post">
     <div>
         <label>아이디 : </label>
         <input type="text" name="memberId" id="memberId"><br>
@@ -28,16 +28,6 @@
         </select>
         <button type="submit">회원가입</button>
     </div>
-    private int userNo;
-    private String userId;
-    private String password;
-    private String nickName;
-    private String name;
-    private String phone;
-    private String email;
-    private LocalDate regDate;
-    private LocalDate susDate;
-    private int susCount;
 </form>
 </body>
 </html>

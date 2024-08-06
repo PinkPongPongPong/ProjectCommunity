@@ -18,12 +18,12 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/register")
-    public String register() {return "user/signup";}
+    public String register() { return "user/signup"; }
 
     @PostMapping("/register")
-    public String register(UserSignupDTO signupDTO) {
-        log.info("signup : {}",signupDTO);
-        userService.register(signupDTO);
+    public String register(UserSignupDTO userSignupDTO) {
+        log.info("signup : {}",userSignupDTO);
+        userService.register(userSignupDTO);
         return "/";
     }
 }
