@@ -34,7 +34,7 @@ public class Comment {
     private User user;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "tbl_board")
+    @JoinColumn(name = "tbl_board",nullable = false)
     private Board board;
 
 

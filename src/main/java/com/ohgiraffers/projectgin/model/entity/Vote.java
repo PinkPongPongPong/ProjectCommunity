@@ -21,11 +21,11 @@ public class Vote {
     private boolean postUpdate;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name ="user_no")
+    @JoinColumn(name ="user_no",nullable = false)
     private User user;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "tbl_board")
+    @JoinColumn(name = "tbl_board",nullable = false)
     private Board board;
 
 }
