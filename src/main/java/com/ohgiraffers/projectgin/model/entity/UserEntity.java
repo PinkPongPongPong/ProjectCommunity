@@ -14,16 +14,16 @@ import java.time.LocalDate;
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int user_no;
-    private String user_id;
+    private int userNo;
+    private String userId;
     private String password;
-    private String nick_name;
+    private String userNickName;
     private String name;
     private String phone;
     private String email;
-    private LocalDate reg_date;
-    private LocalDate sus_date;
-    private int sus_count;
+    private LocalDate regDate;
+    private LocalDate susDate;
+    private int susCount;
     @Enumerated(EnumType.STRING)
     private RoleType role;
 }

@@ -24,6 +24,6 @@ public class UserController {
     public String register(UserSignupDTO userSignupDTO) {
         log.info("signup : {}",userSignupDTO);
         userService.register(userSignupDTO);
-        return "/";
+        return "/auth/login";
     }
 }

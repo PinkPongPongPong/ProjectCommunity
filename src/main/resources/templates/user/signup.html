@@ -9,19 +9,19 @@
 <form th:action="@{/user/register}" th:method="post">
     <div>
         <label>아이디 : </label>
-        <input type="text" name="memberId" id="memberId"><br>
+        <input type="text" name="user_id" id="user_id"><br>
         <label>비밀번호 : </label>
         <input type="password" name="password" id="password"><br>
         <label>이름 : </label>
         <input type="text" name="name" id="name"><br>
         <label>닉네임 : </label>
-        <input type="text" name="nickName" id="nickName"><br>
+        <input type="text" name="user_nickname" id="user_nickname"><br>
         <label>전화번호 : </label>
         <input type="text" name="phone" id="phone"><br>
         <label>이메일 : </label>
         <input type="text" name="email" id="email"><br>
         <label>가입일 : </label>
-        <input type="date" name="regDate" id="regDate"><br>
+        <input type="date" name="reg_date" id="reg_date"><br>
         <select name="role">
             <option value="USER">일반</option>
             <option value="ADMIN">관리자</option>

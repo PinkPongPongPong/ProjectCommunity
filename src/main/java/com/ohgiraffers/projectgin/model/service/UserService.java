@@ -21,17 +21,17 @@ public class UserService {
 
     public void register(UserSignupDTO signupDTO) {
         UserEntity userEntity = UserEntity.builder()
-                .user_id(signupDTO.getUser_id())
-                .nick_name(signupDTO.getNick_name())
+                .userId(signupDTO.getUserId())
+                .userNickName(signupDTO.getUserNickName())
                 .password(passwordEncoder.encode(signupDTO.getPassword())) // 암호화
                 .name(signupDTO.getName())
                 .phone(signupDTO.getPhone())
                 .email(signupDTO.getEmail())
-                .reg_date(signupDTO.getReg_date())
+                .regDate(signupDTO.getRegDate())
                 .role(RoleType.valueOf(signupDTO.getRole())) // user.admin
                 .build();
         UserEntity savedUser = userRepository.save(userEntity);
-        log.info("저장된 회원 정보 : {}", savedUser.getUser_no());
+        log.info("저장된 회원 정보 : {}", savedUser.getUserNo());
     }
 }
 
