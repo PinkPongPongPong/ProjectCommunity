@@ -3,32 +3,50 @@ package com.ohgiraffers.projectgin.model.entity;
 import java.sql.Date;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-//@Entity
-//@Table(name = "tbl_board")
+@Entity
+@Table(name="tbl_board")
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Board {
 
-//    @Id
-//    @Column
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private String post_Id;
-//
-//    @Column(name = "user_nickname")
-//    private String user_NickName;
-//    @Column(name = "post_title")
-//    private String post_Title;
-//    @Column(name = "category_date")
-//    private Date category_Date;
-//    @Column (name = "name_view")
-//    private int views;
-//    @Column (name ="like")
-//    private int like;
-//    @Column (name ="hate")
-//    private int hate;
-//    @Column (name ="division")
-//    private String division;
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinColumn (name = "user_id")
-//    @Column User user;
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="board_no")
+    private int postNo;
+
+    @Column(name="board_date")
+    private Date postDate;
+
+    @Column(name="board_views")
+    private int postViews;
+
+    @Column(name="board_upvote_count")
+    private int postUpdateCount;
+
+    @Column(name="board_title")
+    private String postTitle;
+
+    @Column(name="board_detail")
+    private String postDetail;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_no")
+    private UserEntity user;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
+    @JoinColumn(name = "board_category", nullable = false)
+    private BoardCategory BoardCategory;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
+    @JoinColumn(name = "post_category",nullable = false)
+    private PostCategory postCategory;
+
 
 }
