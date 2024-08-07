@@ -21,7 +21,7 @@ public class CommentUpvote {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name ="user_no",nullable = false)
-    private User user;
+    private UserEntity user;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name = "comment_no",nullable = false)

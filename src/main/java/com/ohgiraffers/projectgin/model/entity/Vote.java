@@ -22,7 +22,7 @@ public class Vote {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name ="user_no",nullable = false)
-    private User user;
+    private UserEntity user;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "tbl_board",nullable = false)
