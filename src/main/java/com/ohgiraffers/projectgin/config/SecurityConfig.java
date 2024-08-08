@@ -36,8 +36,11 @@ public class SecurityConfig {
         httpSecurity.authorizeHttpRequests((authorizationManagerRequestMatcherRegistry -> {
             authorizationManagerRequestMatcherRegistry
                     .requestMatchers("/","index.html").permitAll() // 모두에게 허용
-                    .requestMatchers("/user/register").anonymous() // 비인증사용자만 허용
-                    .requestMatchers("/admin/**").hasRole("ADMIN")
+                    .requestMatchers("/","notification.html").permitAll() // 모두에게 허용
+                    .requestMatchers("/","notificationInput.html").permitAll() // 모두에게 허용
+                    .requestMatchers("/admin/**").permitAll() // 모두에게 허용
+                    .requestMatchers("/user/register").permitAll() // 비인증사용자만 허용
+//                    .requestMatchers("/admin/**").hasRole("ADMIN")
                     .anyRequest().authenticated(); // 인증된 사용자만 요청가능
         }));
         // form login 설정
@@ -57,6 +60,7 @@ public class SecurityConfig {
         });
         return httpSecurity.build();
     }
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

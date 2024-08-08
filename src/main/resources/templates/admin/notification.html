@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>notification</title>
+    <style>
+        head{
+            background: #151515;
+        }
+
+        h1 {
+            font-size: 25px;
+            text-align: center;
+            color : #4d4a4a;
+        }
+
+        /*.footer {*/
+        /*    color: aqua;*/
+        /*}*/
+
+        table{
+            text-align: center;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<!--<header th:replace="~{/common/header :: headerFragment}" class="footer">-->
+<!--    <h1>나는 헤더</h1>-->
+<!--</header>-->
+
+ <h1>공지사항</h1>
+
+<form action="/admin/notification" method="post">
+    <label>공지사항 제목 : </label><input type="text" name="notificationTitle"><br>
+    <label>공지사항 내용 : </label><input type="text" name="notificationContent"><br>
+
+    <input type="submit" value="전송">
+</form>
+
+<button type="button" onclick="location.href='/admin/notificationInput'">글쓰기</button>
+<table border="1">
+    <tr>
+        <th>no</th>
+        <th>제목</th>
+        <th>내용</th>
+        <th>날짜</th>
+    </tr>
+
+    <tr th:each="notification :${notificationList}">
+        <td th:text="${notification.notificationNo}"></td>
+        <td th:text="${notification.notificationTitle}"></td>
+        <td th:text="${notification.notificationContent}"></td>
+        <td th:text="${notification.getNotificationDate}"></td>
+    </tr>
+
+</table>
+
+<!--<footer th:insert="~{/common/footer :: footerFragment}">-->
+<!--    <h2>나는 footer</h2>-->
+<!--</footer>-->
+
+</body>
+</html>

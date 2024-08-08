@@ -18,7 +18,6 @@ public class CommentUpvote {
     @Column(name ="comment_upvote")
     private boolean commentUpvote;
 
-
     @ManyToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name ="user_no",nullable = false)
     private UserEntity user;

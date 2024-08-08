@@ -45,7 +45,7 @@ public class Board {
     private BoardCategory BoardCategory;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
-    @JoinColumn(name = "post_category",nullable = false)
+    @JoinColumn(name = "post_category", nullable = false)
     private PostCategory postCategory;
 
 
