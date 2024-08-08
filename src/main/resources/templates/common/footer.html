@@ -1,15 +1,65 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<style>
-    .footer{
-        background-color: black;
-        color: white;
-    }
-</style>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Footer Fragment</title>
+    <style th:fragment="footerStyle">
+        footer {
+            background-color: black;
+            color: #ecf0f1;
+            padding: 20px;
+            text-align: center;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .footer-logo img {
+            width: 150px;
+            height: auto;
+        }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+        .footer-links li {
+            display: inline;
+            margin: 0 15px;
+        }
+        .footer-links a {
+            color: #ecf0f1;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        p {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
 <footer th:fragment="footer">
-  <div class="footer">
-      <ul>
-          <li></li>
-      </ul>
-  </div>
+    <div class="footer-content">
+        <div class="footer-logo">
+            <img src="OIG2.IPvMlRxAgx5.jfif" alt="FPS GUILD Logo">
+        </div>
+        <ul class="footer-links">
+            <li><a href="#">FPS GUILD 소개</a></li>
+            <li><a href="#">이용약관</a></li>
+            <li><a href="#">개인정보처리방침</a></li>
+            <li><a href="#">청소년 보호정책</a></li>
+            <li><a href="#">게시중단 안내</a></li>
+            <li><a href="#">문의·신고</a></li>
+        </ul>
+        <p>문의메일: <a href="mailto:admin@fpsguild.net">admin@fpsguild.net</a></p>
+        <p>&copy; <span th:text="${#dates.year(#dates.createNow())}"></span> FPS GUILD. All rights reserved.</p>
+    </div>
 </footer>
+</body>
+</html>

@@ -1,5 +1,116 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPS Guild Header</title>
+    <style th:fragment="headerStyle">
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            position: relative;
+            background-color: black;
+            color: white;
+            height: 150px;
+        }
+        .header-logo {
+            position: relative;
+            height: 100%;
+            object-fit: cover;
+            left: 350px;
+        }
+        .header-content {
+            position: absolute;
+            top: 0;
+            left: 500px;
+            right: 0;
+            bottom: 0;
+        }
+        .header-sitename {
+            position: absolute;
+            top: 10px;
+            left: 60px;
+        }
+        .header-sitename h1 {
+            margin: 0;
+            font-size: 50px;
+        }
+        .header-sitename a {
+            color: white;
+            text-decoration: none;
+        }
+        .header-boardsUSER {
+            position: absolute;
+            bottom: 10px;
+            left: 50px;
+        }
+        .header-boardsUSER nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        .header-boardsUSER nav ul li {
+            margin-right: 100px;
+        }
+        .header-boardsUSER nav ul li a {
+            color: white;
+            text-decoration: none;
+            background-color: black;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 15px;
+            transition: background-color 0.3s;
+        }
+        .header-boardsUSER nav ul li a:hover {
+            background-color: #333;
+        }
+        .header-search {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+        .header-search input[type="text"] {
+            padding: 8px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            width: 200px;
+        }
+        .header-search button {
+            padding: 8px 15px;
+            background-color: rgb(54, 54, 54);
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
 <header th:fragment="header">
-    <h1>header Fragment</h1>
+    <img th:src="@{/images/OIG2.IPvMlRxAgx5.jfif}" alt="Logo" class="header-logo">
+    <div class="header-content">
+        <div class="header-sitename">
+            <h1><a th:href="@{/}">FPS GUILD</a></h1>
+        </div>
+        <div class="header-boardsUSER">
+            <nav>
+                <ul>
+                    <li><a th:href="@{/notice}">공지게시판</a></li>
+                    <li><a th:href="@{/strategy}">공략게시판</a></li>
+                    <li><a th:href="@{/free}">자유게시판</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header-search">
+            <form class="search-form" th:action="@{/search}" method="get">
+                <input type="text" name="query" placeholder="통합검색">
+                <button type="submit">검색</button>
+            </form>
+        </div>
+    </div>
 </header>
+</body>
+</html>
