@@ -1,6 +1,6 @@
 package com.ohgiraffers.projectgin.auth.principal;
 
-import com.ohgiraffers.projectgin.model.entity.UserEntity;
+import com.ohgiraffers.projectgin.model.entity.MemberEntity;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,23 +13,23 @@ import java.util.Collection;
 @Data
 public class AuthPrincipal implements UserDetails, Serializable {
 
-    private final UserEntity userEntity;
+    private final MemberEntity memberEntity;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         ArrayList<GrantedAuthority> auth = new ArrayList<>();
-        auth.add(new SimpleGrantedAuthority("ROLE_" + userEntity.getRole()));
+        auth.add(new SimpleGrantedAuthority("ROLE_" + memberEntity.getRole()));
         return auth;
     }
 
     @Override
     public String getPassword() {
-        return userEntity.getPassword();
+        return memberEntity.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return userEntity.getUserId();
+        return memberEntity.getMemberId();
     }
 
     @Override

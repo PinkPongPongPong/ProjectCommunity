@@ -1,17 +1,25 @@
 package com.ohgiraffers.projectgin.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "tbl_notification")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Builder
 public class Notification {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="notification_no")
-    private String notificationNo;
-    @Column(name="admin_no")
-    private String adminNo;
+    private int notificationNo;
+//    @Column(name="admin_no")
+//    private String adminNo;
     @Column(name="notification_title")
     private String notificationTitle;
     @Column(name="notification_content")
