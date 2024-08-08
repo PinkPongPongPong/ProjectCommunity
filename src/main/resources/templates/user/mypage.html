@@ -1,11 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>My Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .profile img {
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+        .profile-info {
+            flex-grow: 1;
+        }
+        .profile-info h2 {
+            margin: 0;
+            color: #333;
+        }
+        .profile-info p {
+            color: #666;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
 </head>
 <body>
-<h1>MyPage</h1>
-<p>[[ | ${ #authentication.principal.userEntity.userNickName } / ${ #authentication.principal.userEntity.regDate } | ]]</p>
+<div class="header">
+    <h1>My Page</h1>
+</div>
+<div class="container">
+    <div class="profile">
+        <img src="profile.jpg" alt="프로필 사진" width="100" height="100">
+        <div sec:authorize="isAuthenticated()" class="profile-info">
+            <p>[[ | ${ #authentication.principal.memberEntity.memberNickName } | ]]님 환영합니다. </p>
+            <p>가입일 :[[ | ${ #authentication.principal.memberEntity.regDate } | ]]</p>
+            <p>안녕하세요! 저는 홍길동입니다. 여기에 간단한 자기소개를 작성해 주세요.</p>
+        </div>
+    </div>
+    <div>
+        <h3>내 정보</h3>
+        <ul>
+            <p>전화번호 :[[ | ${ #authentication.principal.memberEntity.phone } | ]]</p>
+            <p>이메일 :[[ | ${ #authentication.principal.memberEntity.email } | ]]</p>
+        </ul>
+    </div>
+    <h1 align="center">회원정보수정</h1>
+    <div class="">
+        <form th:action="@{/user/modify}" method="post">
+            <table>
+                <tr>
+                    <td>* 비밀번호</td>
+                    <td><input type="password" name="memberPw" id="password" value=""></td>
+                </tr>
+                <tr>
+                    <td>* 닉네임</td>
+                    <td><input type="text" name="memberNickName" id="memberNickName"></td>
+                </tr>
+
+                <tr>
+                    <td>* 이메일</td>
+                    <td><input type="text" name="Email" id="email"></td>
+                </tr>
+                <tr>
+                    <td>* 전화번호</td>
+                    <td><input type="text" name="Phone" id="phone"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="수정하기">
+                        <button type="button" onclick="removeMember();"> 탈퇴하기 </button>
+                        <!-- //type을 button으로 꼭 적어줘야! submit이 되지 않는다!! 꼭 기억하기!
+                             -->
+                    </td>
+                </tr>
+            </table>
+
+        </form>
+    </div>
+</div>
+
+<div class="footer">
+    &copy; 2024 My Page. All Rights Reserved.
+</div>
+
+
+<script>
+    function removeMember() {
+        if(window.confirm("탈퇴하시겠습니까?")){
+            location.href="/member/remove.kh";
+        }
+
+    }
+</script>
 </body>
 </html>

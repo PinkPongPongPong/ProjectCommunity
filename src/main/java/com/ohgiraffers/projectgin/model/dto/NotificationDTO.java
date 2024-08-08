@@ -8,7 +8,7 @@ import lombok.*;
 @Getter
 @ToString
 public class NotificationDTO {
-    private String notificationNo;
+    private int notificationNo;
     private String adminNo;
     private String notificationTitle;
     private String notificationContent;
