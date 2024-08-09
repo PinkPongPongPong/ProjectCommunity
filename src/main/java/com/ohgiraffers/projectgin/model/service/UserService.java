@@ -1,8 +1,8 @@
 package com.ohgiraffers.projectgin.model.service;
 
-import com.ohgiraffers.projectgin.model.dto.UserSignupDTO;
+import com.ohgiraffers.projectgin.model.dto.MemberSignupDTO;
 import com.ohgiraffers.projectgin.model.entity.RoleType;
-import com.ohgiraffers.projectgin.model.entity.UserEntity;
+import com.ohgiraffers.projectgin.model.entity.MemberEntity;
 import com.ohgiraffers.projectgin.model.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,10 +19,10 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public void register(UserSignupDTO signupDTO) {
-        UserEntity userEntity = UserEntity.builder()
-                .userId(signupDTO.getUserId())
-                .userNickName(signupDTO.getUserNickName())
+    public void register(MemberSignupDTO signupDTO) {
+        MemberEntity userEntity = MemberEntity.builder()
+                .memberId(signupDTO.getMemberId())
+                .memberNickName(signupDTO.getMemberNickName())
                 .password(passwordEncoder.encode(signupDTO.getPassword())) // 암호화
                 .name(signupDTO.getName())
                 .phone(signupDTO.getPhone())
@@ -30,8 +30,8 @@ public class UserService {
                 .regDate(LocalDate.now())
                 .role(RoleType.valueOf(signupDTO.getRole())) // user.admin
                 .build();
-        UserEntity savedUser = userRepository.save(userEntity);
-        log.info("저장된 회원 정보 : {}", savedUser.getUserNo());
+        MemberEntity savedUser = userRepository.save(userEntity);
+        log.info("저장된 회원 정보 : {}", savedUser.getMemberNo());
     }
 }
 

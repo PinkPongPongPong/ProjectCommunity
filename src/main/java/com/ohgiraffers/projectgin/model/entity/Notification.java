@@ -3,11 +3,14 @@ package com.ohgiraffers.projectgin.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Entity
-@Table(name = "tbl_notification")
+@Table(name="tbl_notification")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 @Builder
 @ToString
 public class Notification {
@@ -15,10 +18,7 @@ public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="notification_no")
-    private String notificationNo;
-
-    @Column(name="admin_no")
-    private String adminNo;
+    private int notificationNo;
 
     @Column(name="notification_title")
     private String notificationTitle;
@@ -27,8 +27,9 @@ public class Notification {
     private String notificationContent;
 
     @Column(name="notification_date")
-    private String notificationDate;
+    private LocalDate notificationDate;
 
     @Column(name="notification_count")
-    private String notificationCount;
+    private int notificationCount;
+
 }

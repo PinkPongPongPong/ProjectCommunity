@@ -1,47 +1,51 @@
 package com.ohgiraffers.projectgin.controller;
 
 import com.ohgiraffers.projectgin.model.dto.NotificationDTO;
+import com.ohgiraffers.projectgin.model.entity.Notification;
 import com.ohgiraffers.projectgin.model.service.NotificationService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/notification")
 @RequiredArgsConstructor
+@Slf4j
 public class NotificationController {
 
     private final NotificationService notificationService;
 
-    @GetMapping("/notification")
-    public ModelAndView notice(ModelAndView mv) {
+    @GetMapping("")
+    public String notification(Model model){
+        log.info("notification 요청들어옴...");
 
-        List<NotificationDTO> notificationList = new ArrayList<>();
-        notificationList.add(new NotificationDTO("1", "2", "제목", "내용","2024-01-01","3"));
-        notificationList.add(new NotificationDTO("2", "3", "제목1", "내용1","2024-01-02","4"));
-//        notificationList.add(new NotificationDTO("1", "2", "제목", "내용","2024-01-01","3"));
-//        notificationList.add(new NotificationDTO("1", "2", "제목", "내용","2024-01-01","3"));
+        List<Notification> notifications = notificationService.getNotificationList();
+        model.addAttribute("notifications", notifications);
 
-        mv.addObject("notificationList", notificationList);
-        mv.setViewName("/admin/notification");
+        return "/admin/notification";
+    }
 
-//        List<NotificationDTO> notificationList = notificationService.create();
+    @GetMapping("/input")
+    public ModelAndView Input(ModelAndView mv){
+        mv.setViewName("/admin/notificationInput");
         return mv;
     }
 
-    @PostMapping("/notification")
-    public String registNewMenu(@ModelAttribute NotificationDTO newNotification) {
+    @PostMapping("/input")
+    public String notificationContent(@ModelAttribute NotificationDTO newNotification, ModelAndView mv){
 
-//        notificationService.create();
+        log.info("newNotificationDTO : {}" , newNotification);
+        notificationService.savedNotification(newNotification);
+        mv.setViewName("redirect:/admin/notification");
 
-        return "redirect:/admin/notification";
+        return "/admin/notification";
     }
 
 }

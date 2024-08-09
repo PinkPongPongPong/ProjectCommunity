@@ -1,6 +1,6 @@
 package com.ohgiraffers.projectgin.controller;
 
-import com.ohgiraffers.projectgin.model.dto.UserSignupDTO;
+import com.ohgiraffers.projectgin.model.dto.MemberSignupDTO;
 import com.ohgiraffers.projectgin.model.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ public class UserController {
     public String register() { return "user/signup"; }
 
     @PostMapping("/register")
-    public String register(UserSignupDTO userSignupDTO) {
+    public String register(MemberSignupDTO userSignupDTO) {
         log.info("signup : {}",userSignupDTO);
         userService.register(userSignupDTO);
         return "/auth/login";

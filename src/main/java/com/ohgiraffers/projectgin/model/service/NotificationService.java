@@ -3,40 +3,38 @@ package com.ohgiraffers.projectgin.model.service;
 import com.ohgiraffers.projectgin.model.dto.NotificationDTO;
 import com.ohgiraffers.projectgin.model.entity.Notification;
 import com.ohgiraffers.projectgin.model.repository.NotificationRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Slf4j
 @Service
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class NotificationService {
 
     private final NotificationRepository notificationRepository;
-//    private final ModelMapper modelMapper;
-
-    public NotificationService(NotificationRepository notificationRepository) {
-        this.notificationRepository = notificationRepository;
-//        this.modelMapper = modelMapper;
-    }
 
     @Transactional
-    public void create(NotificationDTO notificationDTO) {
+    public void savedNotification(NotificationDTO notificationDTO){
 
-//        Notification notification = modelMapper.map(notificationDTO, Notification.class);
-
-        Notification notification = new Notification().builder()
-                .notificationNo(notificationDTO.getNotificationNo())
-                .adminNo(notificationDTO.getAdminNo())
+        Notification notification = Notification.builder()
                 .notificationTitle(notificationDTO.getNotificationTitle())
-                .notificationCount(notificationDTO.getNotificationContent())
-                .notificationDate(notificationDTO.getNotificationDate())
-                .notificationCount(notificationDTO.getNotificationCount())
+                .notificationContent(notificationDTO.getNotificationContent())
+                .notificationDate(LocalDate.now())
+                .notificationCount(0)
                 .build();
 
-        notificationRepository.save(notification);
+        Notification savedNotification = notificationRepository.save(notification);
+        log.info("saved : {}",savedNotification);
+    }
 
+    public List<Notification> getNotificationList(){
+        return  notificationRepository.findAll();
     }
 
 }

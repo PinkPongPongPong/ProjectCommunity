@@ -2,7 +2,7 @@ package com.ohgiraffers.projectgin.auth.service;
 
 
 import com.ohgiraffers.projectgin.auth.principal.AuthPrincipal;
-import com.ohgiraffers.projectgin.model.entity.UserEntity;
+import com.ohgiraffers.projectgin.model.entity.MemberEntity;
 import com.ohgiraffers.projectgin.model.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -22,10 +22,10 @@ public class AuthService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity userEntity =  userRepository
-                .findUserEntityByUserId(username)
+        MemberEntity memberEntity =  userRepository
+                .findMemberEntityByMemberId(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username));
-        log.info("로그인하는 회원이름 : {}", userEntity.getUserNickName());
-        return new AuthPrincipal(userEntity);
+        log.info("로그인하는 회원이름 : {}", memberEntity.getMemberNickName());
+        return new AuthPrincipal(memberEntity);
     }
 }

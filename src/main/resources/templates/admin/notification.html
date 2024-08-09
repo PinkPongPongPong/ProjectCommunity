@@ -5,7 +5,7 @@
     <title>notification</title>
     <style>
         head{
-            background: #151515;
+            background: #ffffff;
         }
 
         h1 {
@@ -32,15 +32,9 @@
 <!--</header>-->
 
  <h1>공지사항</h1>
+<button type="button" onclick="location.href='/notification/input'">글쓰기</button>
+<button type="button" onclick="location.href='/notification/modify'">수정하기</button>
 
-<form action="/admin/notification" method="post">
-    <label>공지사항 제목 : </label><input type="text" name="notificationTitle"><br>
-    <label>공지사항 내용 : </label><input type="text" name="notificationContent"><br>
-
-    <input type="submit" value="전송">
-</form>
-
-<button type="button" onclick="location.href='/admin/notificationInput'">글쓰기</button>
 <table border="1">
     <tr>
         <th>no</th>

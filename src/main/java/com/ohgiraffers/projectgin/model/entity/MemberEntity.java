@@ -6,18 +6,18 @@ import lombok.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "tbl_user")
+@Table(name = "tbl_member")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Builder
-public class UserEntity {
+public class MemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userNo;
-    private String userId;
+    private int memberNo;
+    private String memberId;
     private String password;
-    private String userNickName;
+    private String memberNickName;
     private String name;
     private String phone;
     private String email;

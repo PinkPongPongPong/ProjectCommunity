@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="comment_upvote")
+@Table(name="tbl_comment_upvote")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,13 +16,13 @@ public class CommentUpvote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="comment_upvote")
-    private boolean commentUpvote;
+    private int commentUpvote;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
-    @JoinColumn(name ="user_no",nullable = false)
-    private UserEntity user;
+    @JoinColumn(name ="member_no")
+    private MemberEntity member;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
-    @JoinColumn(name = "comment_no",nullable = false)
+    @JoinColumn(name = "comment_no")
     private Comment comment;
     }

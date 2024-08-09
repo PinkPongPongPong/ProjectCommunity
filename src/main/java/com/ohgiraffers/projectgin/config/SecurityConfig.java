@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -29,20 +30,21 @@ public class SecurityConfig {
                                 .toStaticResources()
                                 .atCommonLocations());
     }
+
     // Spring Security 에서 제공하는 인증, 인가를 위한 필처들의 모음
     // 기본적으로 제공하는 필터들이 있고, 커스첨 필터또한 적용 시킬 수 있다.
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeHttpRequests((authorizationManagerRequestMatcherRegistry -> {
-            authorizationManagerRequestMatcherRegistry
+        httpSecurity.csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests((authorizationManagerRequestMatcherRegistry -> {
+                    authorizationManagerRequestMatcherRegistry
                     .requestMatchers("/","index.html").permitAll() // 모두에게 허용
-                    .requestMatchers("/","notification.html").permitAll() // 모두에게 허용
-                    .requestMatchers("/","notificationInput.html").permitAll() // 모두에게 허용
-                    .requestMatchers("/admin/**").permitAll() // 모두에게 허용
+                    .requestMatchers("/admin/notification/**").permitAll() // 모두에게 허용
                     .requestMatchers("/user/register").permitAll() // 비인증사용자만 허용
 //                    .requestMatchers("/admin/**").hasRole("ADMIN")
-                    .anyRequest().authenticated(); // 인증된 사용자만 요청가능
-        }));
+                    .anyRequest().permitAll(); // 인증된 사용자만 요청가능
+                }));
+
         // form login 설정
         httpSecurity.formLogin((formLoginConfigurer -> {
             formLoginConfigurer
@@ -53,7 +55,8 @@ public class SecurityConfig {
                     .defaultSuccessUrl("/") // 로그인 성공시 이동할 url
                     .permitAll();
         }));
-        httpSecurity.logout(logoutConfigurer ->{
+
+        httpSecurity.logout(logoutConfigurer -> {
             logoutConfigurer
                     .logoutUrl("/auth/logout")
                     .logoutSuccessUrl("/");
