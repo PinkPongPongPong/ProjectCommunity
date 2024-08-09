@@ -4,23 +4,29 @@ import com.ohgiraffers.projectgin.model.dto.MemberSignupDTO;
 import com.ohgiraffers.projectgin.model.entity.RoleType;
 import com.ohgiraffers.projectgin.model.entity.MemberEntity;
 import com.ohgiraffers.projectgin.model.repository.MemberRepository;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+
 
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional(readOnly = true)
 public class MemberService {
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
-
+    @Transactional
     public void register(MemberSignupDTO signupDTO) {
         MemberEntity memberEntity = MemberEntity.builder()
                 .memberId(signupDTO.getMemberId())
