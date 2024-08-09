@@ -1,27 +1,20 @@
 package com.ohgiraffers.projectgin.controller;
 
 import com.ohgiraffers.projectgin.model.dto.MemberSignupDTO;
-import com.ohgiraffers.projectgin.model.entity.MemberEntity;
 import com.ohgiraffers.projectgin.model.repository.MemberRepository;
 import com.ohgiraffers.projectgin.model.service.MemberService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/user")
 @Slf4j
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class UserController {
 
     private final MemberService memberService;
@@ -40,33 +33,19 @@ public class UserController {
     @GetMapping("/mypage")
     public void mypage() {}
 
-//    @Transactional
-//    public String updateMember(String memberId, MemberSignupDTO memberDto) {
-//        MemberEntity member = memberRepository.findMemberEntityByMemberId(memberId)
-//                .orElseThrow(() -> new IllegalArgumentException("No member with id " + memberId));
-//
-//        MemberEntity updatedMember = member.update(
-//                memberDto.getMemberNickName(),
-//                memberDto.getEmail(),
-//                memberDto.getPassword()
-//        );
-//
-//        return memberRepository.save(updatedMember).getMemberId();
-//    }
-
-//    public MemberSignupDTO findMemberById(String memberId) {
-//        MemberEntity member = memberRepository.findById(memberId)
-//                .orElseThrow(() -> new IllegalArgumentException("No member with id " + memberId));
-//
-//        return MemberSignupDTO.builder()
-//                .memberId(member.getMemberId())
-//                .name(member.getName())
-//                .email(member.getEmail())
-//                .password(member.getPassword())
-//                .build();
-//    }
-
+    @PostMapping("/modify")
+    public String modifyUser(@ModelAttribute("member") MemberSignupDTO memberDTO,
+                             RedirectAttributes redirectAttributes){
+        try {
+            memberService.updateMemberInfo(memberDTO);
+            redirectAttributes.addFlashAttribute("message", "회원 정보가 성공적으로 수정되었습니다.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "회원 정보 수정 중 오류가 발생했습니다.");
+        }
+        return "/user/mypage";
+    }
 
     @GetMapping("/main")
-    public String main(){ return "/index"; }
+    public String mainPage(){ return "index"; }
+
     }

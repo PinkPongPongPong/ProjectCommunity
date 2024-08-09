@@ -64,6 +64,29 @@ public class MemberService {
     public boolean checkUserNickName(String memberNickName) {
         return memberRepository.existsByMemberNickName(memberNickName);
     }
+
+
+    @Transactional
+    public void updateMemberInfo(MemberSignupDTO memberDTO) {
+        MemberEntity memberEntity = memberRepository.findById(memberDTO.getMemberNo())
+                .orElseThrow(() -> new IllegalArgumentException("Member not found with ID: " + memberDTO.getMemberNo()));
+
+                memberEntity = memberEntity.builder()
+                .memberNo(memberEntity.getMemberNo())
+                .memberId(memberEntity.getMemberId())  // ID는 변경하지 않음
+                .password(memberDTO.getPassword())
+                .memberNickName(memberDTO.getMemberNickName())
+                .name(memberEntity.getName())  // 이름은 변경하지 않음
+                .phone(memberDTO.getPhone())
+                .email(memberDTO.getEmail())
+                .regDate(memberEntity.getRegDate())  // 등록일은 변경하지 않음
+                .susDate(memberEntity.getSusDate())
+                .susCount(memberEntity.getSusCount())
+                .role(memberEntity.getRole())  // 역할은 변경하지 않음
+                .build();
+
+        memberRepository.save(memberEntity);
+    }
 }
 
 
