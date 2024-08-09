@@ -2,15 +2,20 @@ package com.ohgiraffers.projectgin.controller;
 
 import com.ohgiraffers.projectgin.model.dto.MemberSignupDTO;
 import com.ohgiraffers.projectgin.model.entity.MemberEntity;
+import com.ohgiraffers.projectgin.model.repository.MemberRepository;
 import com.ohgiraffers.projectgin.model.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -20,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final MemberService memberService;
-    private final HttpSession httpSession;
+    private final MemberRepository memberRepository;
 
     @GetMapping("/register")
     public String register() { return "user/signup"; }
@@ -35,26 +40,33 @@ public class UserController {
     @GetMapping("/mypage")
     public void mypage() {}
 
-
-    @PostMapping("/modify")
-    public String updateMyPage(@ModelAttribute MemberSignupDTO memberUpdateDTO) {
-        memberService.updateMyPage(memberUpdateDTO);
-        return "redirect:/user/mypage"; // 수정 후 마이페이지로 리다이렉트
-    }
-    @GetMapping("/editProfile")
-    public void editProfile() {}
-
-//    @GetMapping("/edit")
-//    public String editProfile(Model model) {
-//        // 현재 로그인된 사용자 정보를 가져와서 뷰에 전달
-//        MemberEntity member = memberService.getCurrentMember();
-//        model.addAttribute("member", member);
-//        return "user/editProfile"; // 회원정보 수정 페이지로 이동
+//    @Transactional
+//    public String updateMember(String memberId, MemberSignupDTO memberDto) {
+//        MemberEntity member = memberRepository.findMemberEntityByMemberId(memberId)
+//                .orElseThrow(() -> new IllegalArgumentException("No member with id " + memberId));
+//
+//        MemberEntity updatedMember = member.update(
+//                memberDto.getMemberNickName(),
+//                memberDto.getEmail(),
+//                memberDto.getPassword()
+//        );
+//
+//        return memberRepository.save(updatedMember).getMemberId();
 //    }
 
-    @PostMapping("/edit")
-    public String updateProfile(@ModelAttribute MemberSignupDTO memberUpdateDTO) {
-        memberService.updateProfile(memberUpdateDTO);
-        return "redirect:/user/mypage"; // 수정 후 마이페이지로 리다이렉트
-    }
+//    public MemberSignupDTO findMemberById(String memberId) {
+//        MemberEntity member = memberRepository.findById(memberId)
+//                .orElseThrow(() -> new IllegalArgumentException("No member with id " + memberId));
+//
+//        return MemberSignupDTO.builder()
+//                .memberId(member.getMemberId())
+//                .name(member.getName())
+//                .email(member.getEmail())
+//                .password(member.getPassword())
+//                .build();
+//    }
+
+
+    @GetMapping("/main")
+    public String main(){ return "/index"; }
     }

@@ -27,4 +27,7 @@ public class MemberEntity {
     private int susCount;
     @Enumerated(EnumType.STRING)
     private RoleType role;
+
+//    public MemberEntity update(String name, String email, String password) {
+//    }
 }

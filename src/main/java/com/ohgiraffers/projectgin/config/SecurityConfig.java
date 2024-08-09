@@ -39,9 +39,8 @@ public class SecurityConfig {
             authorizationManagerRequestMatcherRegistry
                     .requestMatchers("/","index.html").permitAll() // 모두에게 허용
                     .requestMatchers("/user/register").anonymous() // 비인증사용자만 허용
-                    .requestMatchers("/user/edit").permitAll()
                     .requestMatchers("/admin/**").hasRole("ADMIN")
-                    .anyRequest().permitAll();// 인증된 사용자만 요청가능
+                    .anyRequest().authenticated();// 인증된 사용자만 요청가능
 
         }));
         // form login 설정
