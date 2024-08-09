@@ -18,23 +18,26 @@ public class Board {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="board_no")
+    @Column(name="post_no")
     private int postNo;
 
-    @Column(name="board_date")
+    @Column(name="post_date")
     private Date postDate;
 
-    @Column(name="board_views")
+    @Column(name="post_views")
     private int postViews;
 
-    @Column(name="board_upvote_count")
+    @Column(name="post_upvote_count")
     private int postUpdateCount;
 
-    @Column(name="board_title")
-    private String postTitle;
+    @Column(name="title", unique = true)
+    private String title;
 
-    @Column(name="board_detail")
-    private String postDetail;
+    @Column(name="content")
+    private String content;
+
+    @Column(name="member_nickname", unique = true)
+    private String memberNickname;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "member_no")

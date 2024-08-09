@@ -11,12 +11,12 @@ import java.sql.Date;
 @ToString
 public class BoardDTO{
 
-    private int BoardNo;
-    private Date BoardDate;
-    private int BoardCount;
-    private int BoardUpvoteCount;
-    private String BoardTitle;
-    private String BoardDetail;
+    private int postNo;
+    private Date postDate;
+    private int postCount;
+    private int postUpvoteCount;
+    private String title;
+    private String content;
 
 
 }
