@@ -1,7 +1,6 @@
 package com.ohgiraffers.projectgin.model.dto;
 
 import lombok.*;
-
 import java.time.LocalDate;
 
 @NoArgsConstructor
@@ -9,11 +8,11 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @ToString
-public class UserSignupDTO {
-    private int userNo;
-    private String userId;
+public class MemberSignupDTO {
+    private int memberNo;
+    private String memberId;
     private String password;
-    private String userNickName;
+    private String memberNickName;
     private String name;
     private String phone;
     private String email;

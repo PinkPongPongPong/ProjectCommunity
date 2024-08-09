@@ -8,5 +8,5 @@ import lombok.*;
 @Getter
 @ToString
 public class CommentUpvoteDTO {
-    private boolean comment_upvote;
+    private int comment_upvote;
 }

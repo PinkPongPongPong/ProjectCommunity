@@ -37,15 +37,15 @@ public class Board {
     private String postDetail;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_no")
-    private UserEntity user;
+    @JoinColumn(name = "member_no")
+    private MemberEntity member;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
-    @JoinColumn(name = "board_category", nullable = false)
+    @JoinColumn(name = "board_category")
     private BoardCategory BoardCategory;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
-    @JoinColumn(name = "post_category",nullable = false)
+    @JoinColumn(name = "post_category")
     private PostCategory postCategory;
 
 

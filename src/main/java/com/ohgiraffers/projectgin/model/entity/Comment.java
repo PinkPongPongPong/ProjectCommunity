@@ -20,8 +20,8 @@ public class Comment {
     @Column(name="comment_no")
     private int commentNo;
 
-    @Column(name="user_nickname")
-    private String userNickname;
+    @Column(name="member_nick_name")
+    private String memberNickName;
 
     @Column(name="comment_date")
     private Date commentDate;
@@ -30,11 +30,11 @@ public class Comment {
     private Date commentUpvoteCount;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name ="user_no")
-    private UserEntity user;
+    @JoinColumn(name ="member_no")
+    private MemberEntity member;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "tbl_board",nullable = false)
+    @JoinColumn(name = "tbl_board")
     private Board board;
 
 
