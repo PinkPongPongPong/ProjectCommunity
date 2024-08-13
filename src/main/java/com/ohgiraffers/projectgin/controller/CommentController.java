@@ -2,6 +2,7 @@ package com.ohgiraffers.projectgin.controller;
 
 import com.ohgiraffers.projectgin.model.dto.CommentDTO;
 import com.ohgiraffers.projectgin.model.service.CommentService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,9 +10,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/comments")
+@RequiredArgsConstructor
 public class CommentController {
 
-    @Autowired
+//    @Autowired
     private CommentService commentService;
 
     @PostMapping

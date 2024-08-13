@@ -7,10 +7,10 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class BeanConfiguration {
-    @Bean
-    public ModelMapper modelMapper() {
-
-        return modelMapper();
-    }
+//    @Bean
+//    public ModelMapper modelMapper() {
+//
+//        return modelMapper();
+//    }
 
 }

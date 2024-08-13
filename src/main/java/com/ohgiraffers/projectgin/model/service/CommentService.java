@@ -17,10 +17,10 @@ import java.util.stream.Collectors;
 @Service
 public class CommentService {
 
-    @Autowired
+//    @Autowired
     private CommentRepository commentRepository;
 
-    @Autowired
+//    @Autowired
     private ModelMapper modelMapper;
 
     public CommentDTO createComment(CommentDTO commentDTO) {

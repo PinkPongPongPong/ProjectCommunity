@@ -11,14 +11,14 @@ import java.util.List;
 @Repository
 @EnableJpaRepositories
 public interface BoardRepository extends JpaRepository<Board, Integer> {
-    // 제목으로 검색
-    List<Board> findByTitleContaining(String title);
-    // 작성자로 검색
-    List<Board> findByAuthorContaining(String author);
-    // 내용으로 검색
-    List<Board> findByContentContaining(String content);
-    // 제목 또는 내용으로 검색
-    List<Board> findByTitleContainingOrContentContaining(String title, String content);
-    List<Board> findByCategory(String category);
-    List<Board> findAllByBoardCategory(BoardCategory boardCategory);
+//    // 제목으로 검색
+//    List<Board> findByTitleContaining(String title);
+//    // 작성자로 검색
+//    List<Board> findByAuthorContaining(String author);
+//    // 내용으로 검색
+//    List<Board> findByContentContaining(String content);
+//    // 제목 또는 내용으로 검색
+//    List<Board> findByTitleContainingOrContentContaining(String title, String content);
+//    List<Board> findByCategory(String category);
+//    List<Board> findAllByBoardCategory(BoardCategory boardCategory);
 }
