@@ -36,12 +36,12 @@ public class CommentService {
         return comments.stream().map(comment -> modelMapper.map(comment,CommentDTO.class)).collect(Collectors.toList());
     }
 
-    public CommentDTO updateComment(int commentNo, CommentDTO commentDTO) {
-        Comment existingComment = commentRepository.findById(commentNo)
-                .orElseThrow(() -> new RuntimeException("Comment not found"));
-        existingComment.(commentDTO.getComment());
-
-    }
+//    public CommentDTO updateComment(int commentNo, CommentDTO commentDTO) {
+//        Comment existingComment = commentRepository.findById(commentNo)
+//                .orElseThrow(() -> new RuntimeException("Comment not found"));
+//        existingComment.(commentDTO.getComment());
+//
+//    }
 
 
     public void deleteComment(int commentNo) {

@@ -38,17 +38,43 @@ public class BoardController {
     private final BoardRepository boardRepository;
     private final CommentRepository commentRepository;
 
-//    public BoardController(MemberService memberService, BoardService boardService, BoardRepository boardRepository) {
-//        this.memberService = memberService;
-//        this.boardService = boardService;
-//        this.boardRepository = boardRepository;
-//    }
 
+    @GetMapping("/{category}/post/{id}")
+    public String viewPost(@PathVariable String category, @PathVariable int id, Model model) {
+        BoardDTO board = boardService.findById(id);
+        model.addAttribute("board", board);
+        model.addAttribute("category", category);
+        return "board/view";
+    }
     @GetMapping("/create/board")
     public void createComment() {
 
     }
 
+
+    @GetMapping("/board/{category}")
+    public String getBoardByCategory(@PathVariable String category, Model model) {
+        model.addAttribute("boards", boardService.findByCategory(category));
+        return "board/board";
+    }
+
+    @GetMapping("/board/{category}/post/{id}")
+    public String getPostById(@PathVariable String category, @PathVariable int id, Model model) {
+        model.addAttribute("post", boardService.findById(id));
+        return "board/post";
+    }
+
+    @PostMapping("/board/{category}/post")
+    public String createPost(@PathVariable String category, @ModelAttribute BoardDTO boardDTO) {
+        boardService.save(boardDTO);
+        return "redirect:/board/" + category;
+    }
+
+    @DeleteMapping("/board/{category}/post/{id}")
+    public String deletePost(@PathVariable String category, @PathVariable int id) {
+        boardService.delete(id);
+        return "redirect:/board/" + category;
+    }
 
 
     @PostMapping("/create/board")
@@ -128,3 +154,6 @@ public class BoardController {
 
     }
 }
+
+
+

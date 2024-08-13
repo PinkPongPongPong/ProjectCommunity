@@ -27,6 +27,13 @@ public class BoardService {
     private final BoardCategoryRepository boardCategoryRepository;
 
 
+    public List<BoardDTO> findAllByCategory(String category) {
+        List<Board> boards = boardRepository.findAllByBoardCategory(boardCategoryRepository.findByBoardCategory(category));
+        return boards.stream()
+                .map(board -> modelMapper.map(board, BoardDTO.class))
+                .collect(Collectors.toList());
+    }
+
     public List<BoardDTO> getAllBoards() {
         List<Board> boards = boardRepository.findAll();
         return boards.stream()
@@ -87,4 +94,25 @@ public class BoardService {
     public Page<BoardDTO> findAllBoard(Pageable pageable) {
         return null;
     }
+
+    public List<BoardDTO> findByCategory(String category) {
+        List<Board> boards = boardRepository.findByCategory(category);
+        return boards.stream().map(board -> modelMapper.map(board, BoardDTO.class)).collect(Collectors.toList());
+    }
+
+    public BoardDTO findById(int id) {
+        Board board = boardRepository.findById(id).orElse(null);
+        return modelMapper.map(board, BoardDTO.class);
+    }
+
+    public void save(BoardDTO boardDTO) {
+        Board board = modelMapper.map(boardDTO, Board.class);
+        boardRepository.save(board);
+    }
+
+    public void delete(int id) {
+        boardRepository.deleteById(id);
+    }
 }
+
+
