@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Post - ' + ${board.title}">Post</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<main>
+
+
+<div th:replace="fragments/header :: header"></div>
+<div class="board-view">
+    <h1 th:text="${board.title}">Title</h1>
+    <div class="post-meta">
+        <span>Author: <span th:text="${board.memberNickName}">Author</span></span>
+        <span>Date: <span th:text="${#dates.format(board.postDate, 'yyyy-MM-dd')}">Date</span></span>
+        <span>Views: <span th:text="${board.postViews}">Views</span></span>
+    </div>
+    <div class="post-content" th:text="${board.content}">
+        Post content goes here.
+    </div>
+    <div class="post-actions">
+        <a th:href="@{|/board/${category}/post/${board.postNo}/edit|}" class="btn">Edit</a>
+        <a href="#" th:onclick="'deletePost(' + ${board.postNo} + ')'">Delete</a>
+    </div>
+    <div class="comments">
+        <h2>Comments</h2>
+        <!-- 댓글을 보여주기 위한 코드 -->
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+<script src="/js/main.js"></script>
+<script>
+    function deletePost(postId) {
+        if (confirm("Are you sure you want to delete this post?")) {
+            fetch(`/board/post/${postId}`, {
+                method: 'DELETE'
+            })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = "/board";
+                    } else {
+                        alert('Delete failed');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    }
+</script>
+</main>
+</body>
+</html>

@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name ="tbl_comment")
@@ -28,6 +29,9 @@ public class Comment {
 
     @Column(name ="comment_upvote_count")
     private Date commentUpvoteCount;
+
+    @Column(name = "content", columnDefinition = "Text")
+    private String content;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name ="member_no")

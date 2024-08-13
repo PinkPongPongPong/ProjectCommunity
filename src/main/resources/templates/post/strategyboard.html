@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Strategy Board</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="game-strategy">
+    <h1>Game Strategy Board</h1>
+    <ul>
+        <li><a th:href="@{/board/battlegrounds}">Battlegrounds</a></li>
+        <li><a th:href="@{/board/callofduty}">Call of Duty</a></li>
+        <li><a th:href="@{/board/csonline}">Counter-Strike Online</a></li>
+
+    </ul>
+</div>
+<div th:replace="/fragments/footer :: footer"></div>
+<script src="/templates/post/type/js/main.js"></script>
+<script src="templates/post/type/js/categorydelete.js"></script>
+</body>
+</html>

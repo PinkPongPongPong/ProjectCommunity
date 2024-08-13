@@ -1,5 +1,42 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+</head>
+<body>
 <header th:fragment="header">
-    <h1>header Fragment</h1>
+    <img src="/templates/imeges/logo1.jfif" alt="Logo" class="header-logo">
+    <div class="header-content">
+        <div class="header-sitename">
+            <h1><a href="사이트주소">FPS GUILD</a></h1>
+        </div>
+        <div class="header-boardsUSER">
+            <nav>
+                <ul>
+                    <li><a href="공지게시판 주소">공지게시판</a></li>
+                    <li><a href="/templates/post/type/strategyboard">공략게시판</a></li>
+                    <li><a href="/templates/post/type/freeboard">자유게시판</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header-boardADMIN" sec:authorize="isAuthenticated()">
+            <nav>
+                <ul>
+                    <li><a href="공지게시판 관리창 주소">공지게시판 관리</a></li>
+                    <li><a href="공략게시판 관리창 주소">공략게시판 관리</a></li>
+                    <li><a href="자유게시판 관리창 주소">자유게시판 관리</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header-search">
+            <form class="search-form" action="/search" method="get">
+                <input type="text" name="query" placeholder="통합검색">
+                <button type="submit">검색</button>
+            </form>
+        </div>
+    </div>
 </header>
+</body>
+</html>

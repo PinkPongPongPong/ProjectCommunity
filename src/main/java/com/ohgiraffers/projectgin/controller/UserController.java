@@ -7,6 +7,7 @@ import com.ohgiraffers.projectgin.model.service.MemberService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,9 +28,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Transactional(readOnly = true)
 public class UserController {
 
+    @Autowired
     private final MemberService memberService;
+
     private final MemberRepository memberRepository;
     private final HttpSession httpSession;
+
 
     @GetMapping("/register")
     public String register() {
@@ -93,3 +97,5 @@ public class UserController {
     public String mainPage(){ return "index"; }
 
     }
+
+

@@ -18,23 +18,24 @@ public class Board {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="board_no")
+    @Column(name="post_no")
     private int postNo;
 
-    @Column(name="board_date")
+    @Column(name="post_date")
     private Date postDate;
 
-    @Column(name="board_views")
+    @Column(name="post_views")
     private int postViews;
 
-    @Column(name="board_upvote_count")
-    private int postUpdateCount;
+    @Column(name="post_upvote_count")
+    private int postUpvoteCount;
 
-    @Column(name="board_title")
-    private String postTitle;
+    @Column(name="title", unique = true)
+    private String title;
 
-    @Column(name="board_detail")
-    private String postDetail;
+    @Column(name="content")
+    private String content;
+
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "member_no")
@@ -48,5 +49,16 @@ public class Board {
     @JoinColumn(name = "post_category")
     private PostCategory postCategory;
 
+
+    public String getMemberNickname(Board board) {
+        return board.getMember() != null ? board.getMember().getMemberNickName() : null;
+    }
+
+    public Board getBoardWithMember(int boardId) {
+        EntityManager entityManager = null;
+        return entityManager.createQuery("SELECT b FROM Board b JOIN FETCH b.member WHERE b.postNo = :boardId", Board.class)
+                .setParameter("boardId", boardId)
+                .getSingleResult();
+    }
 
 }

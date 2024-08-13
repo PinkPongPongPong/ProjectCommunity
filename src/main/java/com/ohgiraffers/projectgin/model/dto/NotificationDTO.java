@@ -4,7 +4,7 @@ import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Setter
 @Getter
 @ToString
 public class NotificationDTO {

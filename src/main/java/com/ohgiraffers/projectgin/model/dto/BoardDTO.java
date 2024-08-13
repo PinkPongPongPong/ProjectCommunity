@@ -1,22 +1,23 @@
 package com.ohgiraffers.projectgin.model.dto;
 
+import com.ohgiraffers.projectgin.model.entity.Board;
 import lombok.*;
 
 import java.sql.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Setter
 @Getter
 @ToString
 public class BoardDTO{
 
-    private int BoardNo;
-    private Date BoardDate;
-    private int BoardCount;
-    private int BoardUpvoteCount;
-    private String BoardTitle;
-    private String BoardDetail;
+    private int postNo;
+    private Date postDate;
+    private int postViews;
+    private int postUpvoteCount;
+    private String title;
+    private String content;
 
 
 }

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 메뉴</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .menu-container {
+            display: flex;
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            width: fit-content;
+        }
+        .menu-label {
+            padding: 10px 15px;
+            background-color: white;
+            font-weight: bold;
+            border-right: 1px solid #ddd;
+            white-space: nowrap;
+        }
+        .menu-bar {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            overflow-x: auto;
+        }
+        .menu-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            background-color: #e8e8e8;
+            white-space: nowrap;
+        }
+        .menu-item.active {
+            background-color: black;
+            color: white;
+        }
+        .title-container {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            width: 1000px;
+        }
+        .title-label {
+            white-space: nowrap;
+            margin-right: 10px;
+        }
+        .title-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            width: 1000px;
+        }
+        .editor-container {
+            margin-top: 20px;
+            width: 1000px;
+        }
+        .content-textarea {
+            width: 100%;
+            height: 300px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            resize: none;
+            overflow-y: auto;
+        }
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+            width: 1000px;
+        }
+        .button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            cursor: pointer;
+            border: none;
+            color: white;
+        }
+        .submit-button {
+            background-color: black;
+        }
+        .cancel-button {
+            background-color: gray;
+        }
+    </style>
+</head>
+<body>
+<div class="menu-container">
+    <div class="menu-label">말머리</div>
+    <ul class="menu-bar">
+        <li class="menu-item active">항목</li>
+        <li class="menu-item">배틀그라운드 공략글</li>
+        <li class="menu-item">콜 오브 듀티 공략글</li>
+        <li class="menu-item">배틀필드 공략글</li>
+        <li class="menu-item">카스 온라인 공략글</li>
+    </ul>
+</div>
+<div class="title-container">
+    <div class="title-label">제목:</div>
+    <input type="text" class="title-input" placeholder="제목을 입력해 주세요.">
+</div>
+<div class="editor-container">
+    <textarea class="content-textarea" placeholder="내용을 입력해 주세요."></textarea>
+</div>
+<div class="button-container">
+    <button class="button cancel-button">취소</button>
+    <button class="button submit-button">등록</button>
+</div>
+
+<script>
+    document.querySelectorAll('.menu-item').forEach(item => {
+        item.addEventListener('click', function() {
+            document.querySelectorAll('.menu-item').forEach(el => {
+                el.classList.remove('active');
+                el.style.backgroundColor = '#e8e8e8';
+                el.style.color = 'black';
+            });
+
+            this.classList.add('active');
+            this.style.backgroundColor = 'black';
+            this.style.color = 'white';
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>list</title>
+
+</head>
+<body>
+<th:blcok th:flagment="boardListFragment">
+<style>
+    .main-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        margin-bottom: 50px; /* 푸터와의 간격 */
+    }
+
+    .main-table {
+        width: 100%;
+        max-width: 1200px;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    .main-table th, .main-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .main-table th {
+        background-color: #f2f2f2;
+    }
+</style>
+<table class="main-table">
+    <thead>
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>조회수</th>
+        <th>추천수</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="board : ${boards}">
+        <td th:text="${board.postNo}"></td>
+        <td>
+            <a th:href="@{/board/{id}(id=${board.postNo})}" th:text="${board.title}"></a>
+        </td>
+        <td th:text="${board.memberNickname}"></td>
+        <td th:text="${#dates.format(board.postDate, 'yyyy-MM-dd')}"></td>
+        <td th:text="${board.postViews}"></td>
+        <td th:text="${board.postUpvoteCount}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div id="paging">
+    <!-- 맨 앞으로 이동-->
+    <button th:onclick="'location.href=\'/post/list?page=' + ${ paging.startPage} + '\''"><<</button>
+    <!-- 이전 페이지 이동 -->
+    <button th:onclick="'location.href=\'/post/list?page=' + ${ paging.currentPage - 1} + '\''"
+            th:disabled="${postlist.first}"></button>
+
+    <!-- 숫자 버튼 -->
+    <th:block th:each="page: ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+        <button th:onclick="'location.href=\'/post/list?page=' + @{${page}} + '\'"
+                th:text="${page}"
+                th:disabled="${paging.currentPage == page}">
+        </button>
+    </th:block>
+
+    <!-- 다음 페이지로 이동 -->
+    <th:block th:each="page: ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+    <button th:onclick="'location.href=\'/post/list?page=' + ${ paging.currentPage + 1} + '\''"
+            th:text="${page}"
+            th:disabled="${ paging.currentPage eq page}">
+    </button>
+    </th:block>
+
+    <!-- 다음 페이지로 이동-->
+    <button th:onclick="'location.href=\'/post/list?page=' + ${ paging.currentPage + 1} + '\''"
+            th:disabled=" ${postList.last}">
+    </button>
+    <!-- 맨 뒤로 이동-->
+    <button th:onclick="'location.href=\'/post/list?page=' + ${ paging.endPage}  + '\''">
+    </button>
+</div>
+</th:blcok>
+</body>
+
+</html>

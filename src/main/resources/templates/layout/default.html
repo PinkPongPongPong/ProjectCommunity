@@ -1,17 +1,22 @@
 <!DOCTYPE html>
-<html
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout/default}">
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>default</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+
 </head>
 <body>
-<div>
-    <header th:include="~{common/header :: header}"></header>
-    <p>아름답다.</p>
-    <footer th:include="~{common/footer :: footer}"></footer>
-</div>
+
+<div th:replace=~/fragment/header :: header></div>
+
+<div th:replace=~/fragment/sidebar :: sidebar></div>
+
+<div th:replace=~/fragment/header :: login></div>
+
+<div th:replace=~/fragment/footer :: footer></div>
+
+
 </body>
 </html>
