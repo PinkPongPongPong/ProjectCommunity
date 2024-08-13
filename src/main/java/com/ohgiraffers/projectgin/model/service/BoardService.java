@@ -53,18 +53,7 @@ public class BoardService {
         return modelMapper.map(board, BoardDTO.class);
     }
 
-//    public void create(BoardDTO boardDTO, MemberEntity memberEntity) {
-//
-//        Board board = Board.builder()
-//                .title(boardDTO.getTitle())
-//                .content(boardDTO.getContent())
-//                .member(memberEntity)
-//                .build();
-//
-//        Board saveBoard = boardRepository.save(board);
-//
-//        log.info("저장된 게시글 번호 : {}", saveBoard.getPostNo());
-//    }
+
 
     public Board findBoardById(int boardId) {
         Board board = boardRepository.findById(boardId)
