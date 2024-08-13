@@ -38,7 +38,7 @@ public class NotificationController {
         model.addAttribute("paging", paging);
         model.addAttribute("notifications", notifications);
 
-        return "admin/notification";
+        return "/admin/notification";
     }
 
     @GetMapping("/input")
@@ -68,6 +68,7 @@ public class NotificationController {
         return "/admin/detail";
     }
 
+
 //    @GetMapping("/notificationmodify/{notificaitonNo}")
 //    public String modifyPage(@PathVariable int notificationNo, Model model) {
 //
@@ -80,8 +81,8 @@ public class NotificationController {
 //
 //        return "admin/notificationmodify";
 //    }
-//
-//
+
+
 //    @PostMapping("/notificationmodify")
 //    // ModelAttribute 생략가능
 //    public String modifyMenu(NotificationDTO modifyNotification) {

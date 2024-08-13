@@ -23,14 +23,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/user")
 @Slf4j
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class UserController {
 
-    @Autowired
     private final MemberService memberService;
-
     private final MemberRepository memberRepository;
-    private final HttpSession httpSession;
 
 
     @GetMapping("/register")
@@ -49,8 +45,6 @@ public class UserController {
     @GetMapping("/mypage")
     public void mypage() {
     }
-
-
 
 @PostMapping("/modify")
     public String updateMyPage(@ModelAttribute("member") MemberEntity memberEntity,

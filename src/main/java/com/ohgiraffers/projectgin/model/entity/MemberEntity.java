@@ -20,7 +20,6 @@ public class MemberEntity {
     @Column(unique = true)
     private String memberId;
     private String password;
-    @Column(name ="member_nickname", unique = true)
     private String memberNickName;
     private String name;
     private String phone;

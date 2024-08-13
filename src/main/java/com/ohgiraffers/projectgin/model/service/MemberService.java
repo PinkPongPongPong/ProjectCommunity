@@ -32,11 +32,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    private final BoardRepository boardRepository;
-    private final ModelMapper modelMapper;
-
     @Transactional(readOnly = false)
-
     public void register(MemberSignupDTO signupDTO) {
         MemberEntity memberEntity = MemberEntity.builder()
                     .memberId(signupDTO.getMemberId())
@@ -52,6 +48,7 @@ public class MemberService {
         log.info("저장된 회원 정보 : {}", savedUser.getMemberNo());
     }
 
+    @Transactional
     public void updateMemberInfo(MemberEntity memberEntity) throws NoSuchFileException {
 
 //         DB 에서 현재 회원 정보 조회
