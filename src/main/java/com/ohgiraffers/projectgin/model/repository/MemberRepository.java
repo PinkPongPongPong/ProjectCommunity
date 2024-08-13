@@ -6,15 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 @Repository
-public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
+public interface MemberRepository extends JpaRepository<MemberEntity, Integer> {
     Optional<MemberEntity> findMemberEntityByMemberId(String memberId);
-    boolean existsByMemberId(String userId);
-
-    boolean existsByEmail(String email);
-
-    boolean existsByPhone(String phone);
-
-    boolean existsByName(String name);
-
-    boolean existsByMemberNickName(String memberNickName);
 }

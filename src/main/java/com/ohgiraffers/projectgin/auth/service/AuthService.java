@@ -18,11 +18,11 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class AuthService implements UserDetailsService {
 
-    private final MemberRepository memberRepository;
+    private final MemberRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        MemberEntity memberEntity =  memberRepository
+        MemberEntity memberEntity =  userRepository
                 .findMemberEntityByMemberId(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username));
         log.info("로그인하는 회원이름 : {}", memberEntity.getMemberNickName());

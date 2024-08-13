@@ -10,12 +10,14 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 @Builder
 public class MemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="member_no")
     private int memberNo;
+    @Column(unique = true)
     private String memberId;
     private String password;
     @Column(name ="member_nickname", unique = true)
@@ -28,7 +30,5 @@ public class MemberEntity {
     private int susCount;
     @Enumerated(EnumType.STRING)
     private RoleType role;
-
-
 
 }
