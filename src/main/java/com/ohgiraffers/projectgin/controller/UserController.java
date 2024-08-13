@@ -7,8 +7,13 @@ import com.ohgiraffers.projectgin.model.service.MemberService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 @Controller
 @RequestMapping("/user")
 @Slf4j
@@ -20,35 +25,38 @@ public class UserController {
     private final HttpSession httpSession;
 
     @GetMapping("/register")
-    public String register() { return "user/signup"; }
+    public String register() {
+        return "user/signup";
+    }
 
     @PostMapping("/register")
     public String register(MemberSignupDTO memberSignupDTO) {
 
-        log.info("signup : {}",memberSignupDTO);
+        log.info("signup : {}", memberSignupDTO);
         memberService.register(memberSignupDTO);
         return "/auth/login";
     }
 
     @GetMapping("/mypage")
-    public void mypage() {}
+    public void mypage() {
+    }
 
 
     @PostMapping("/modify")
-    public String updateMyPage(@ModelAttribute("member") MemberEntity memberEntity , MemberSignupDTO memberSignupDTO) {
+    public String updateMyPage(@ModelAttribute("member") MemberEntity memberEntity,
+                               RedirectAttributes redirectAttributes) {
         try {
-            // 회원 ID가 실제로 존재하는지 확인
-            MemberEntity existingMemberEntity = memberService.findMemberById(memberEntity.getMemberId());
+            // 현재 로그인한 사용자 정보 가져오기
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String loggedInUserId = ((UserDetails) authentication.getPrincipal()).getUsername();
 
-            // existingMemberEntity가 null이 아닌지 확인
-            if (existingMemberEntity == null) {
-                throw new IllegalArgumentException("회원을 찾을 수 없다.");
-            }
+            // 로그인한 사용자 ID로 회원 정보 조회
+            MemberEntity existingMemberEntity = memberService.findMemberById(loggedInUserId);
 
-            // DTO에서 새로운 정보로 업데이트
-            existingMemberEntity.setMemberNickName(memberSignupDTO.getMemberNickName());
-            existingMemberEntity.setPhone(memberSignupDTO.getPhone());
-            existingMemberEntity.setEmail(memberSignupDTO.getEmail());
+            // 기존 정보를 업데이트할 값으로 변경
+            existingMemberEntity.setMemberNickName(memberEntity.getMemberNickName());
+            existingMemberEntity.setPhone(memberEntity.getPhone());
+            existingMemberEntity.setEmail(memberEntity.getEmail());
 
             // 회원 정보 업데이트
             memberService.updateMemberInfo(existingMemberEntity);
@@ -57,9 +65,11 @@ public class UserController {
             return "redirect:/user/mypage";
         } catch (Exception e) {
             // 오류 발생 시 에러 페이지로 리다이렉트
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             return "redirect:/user/mypage?error=true";
         }
     }
+
     @GetMapping("/main")
     public String mainPage(){ return "index"; }
 
