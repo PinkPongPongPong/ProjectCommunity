@@ -2,17 +2,85 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>notificationInput</title>
+    <title>Title</title>
+
+    <style>
+        .navbar {
+            background-color: #000; /* 상단바 배경색을 검은색으로 설정 */
+            color: white; /* 텍스트 색상을 흰색으로 설정 */
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        /* form을 가운데 정렬 */
+        form {
+            text-align: left;
+            width: 300px; /* form의 너비를 설정 */
+            margin: 0 auto; /* form을 수평 가운데에 정렬 */
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            padding: 10px;
+            font-size: 10px;
+            cursor: pointer;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        textarea {
+            width: 100%; /* textarea의 너비를 100%로 설정 */
+            height: 100px; /* textarea의 높이를 100px로 설정 */
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            box-sizing: border-box; /* padding과 border를 포함한 전체 너비와 높이 설정 */
+        }
+
+        .navbar img {
+            height: 35px; /* 이미지의 높이를 설정 (크기를 작게 조정) */
+            margin-right: 10px; /* 이미지와 텍스트 사이의 간격을 설정 */
+        }
+
+        .navbar .text {
+            flex: 1; /* 텍스트가 가능한 공간을 차지하도록 설정 */
+            text-align: left; /* 텍스트 왼쪽 정렬 */
+            font-size: 18px; /* 텍스트 크기 조정 */
+        }
+
+    </style>
+
 </head>
 <body>
 
-<form action="/admin/notification/input" method="post">
+<div class="navbar">
+    <img src="/images/GIN.PNG" alt="Logo">
+    공지사항작성
+</div>
 
-    <label>공지사항 제목 : </label> <input type="text" name="notificationTitle"><br>
-    <label>공지사항 내용 : </label> <input type="text" name="notificationContent"><br>
-    <input type="submit" value="전송">
+<form action="/notification/input" method="post">
+    <label>공지사항 제목 : </label><input type="text" id="notificationTitle" name="notificationTitle"><br>
+
+    <label for="notificationContent">공지사항 내용 : </label>
+    <textarea id="notificationContent" name="notificationContent"></textarea>
+    <br>
+
+    <input type="submit" value="전송" >
+
 </form>
-
-
 </body>
 </html>

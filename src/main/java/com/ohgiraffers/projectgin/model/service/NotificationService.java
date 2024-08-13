@@ -59,17 +59,40 @@ public class NotificationService {
 
     }
 
-//    public NotificationDTO findNotificationByCode(int notificationNo) {
+    public NotificationDTO findNotificationByCode(int notificationNo) {
+
+        //데이터가 없을때 예외처리
+        Notification notification = notificationRepository.findById(notificationNo)
+                .orElseThrow(IllegalArgumentException::new);
+
+        log.info("notification : {}", notification);
+
+        return modelMapper.map(notification, NotificationDTO.class);
+    }
+
+//    public NotificationDTO findMenuByCode(int menuCode) {
 //
-//        Notification notification = notificationRepository.findById(notificationNo)
+//        Notification notification = notificationRepository.findById(menuCode)
 //                .orElseThrow(IllegalArgumentException::new);
 //
-//        log.info("notification : {}", notification);
+//        log.info("menu ============ {}", notification);
 //
 //        return modelMapper.map(notification, NotificationDTO.class);
 //    }
-
-
+//
+//    @Transactional
+//    public void modifyNotification(NotificationDTO modifyNotification) {
+//
+//        // modifyMenu -> 비영속
+//        // 영속
+//        log.info("modifyMenu ===========> {}", modifyNotification);
+//        Notification foundNotification = notificationRepository.findById(modifyNotification.getNotificationNo())
+//                .orElseThrow(() -> new IllegalArgumentException("Menu not found"));
+//
+//        foundNotification.setNotificationTitle(modifyNotification.getNotificationTitle());
+//
+//        log.info("foundMenu ==========> {}", foundNotification);
+//    }
 
 
 }

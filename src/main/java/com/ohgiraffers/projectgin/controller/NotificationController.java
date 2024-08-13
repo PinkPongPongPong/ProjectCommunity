@@ -8,14 +8,17 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
-@RequestMapping("/admin/notification")
+@RequestMapping("/notification")
 @RequiredArgsConstructor
 @Slf4j
 public class NotificationController {
@@ -40,7 +43,7 @@ public class NotificationController {
 
     @GetMapping("/input")
     public ModelAndView Input(ModelAndView mv){
-        mv.setViewName("/admin/notificationInput");
+        mv.setViewName("admin/notificationInput");
         return mv;
     }
 
@@ -49,22 +52,46 @@ public class NotificationController {
 
         log.info("newNotificationDTO : {}" , newNotification);
         notificationService.savedNotification(newNotification);
-        mv.setViewName("redirect:/admin/notification");
+        mv.setViewName("redirect:/notification");
 
         return mv;
     }
 
-//    // 단일 조회 기능
-//    @GetMapping("/{notificationNo}")
-//    public String findMenuByCode(@PathVariable("notificationNo") int notificationNo, Model model) {
-//
-//        log.info("notification : {}", notificationNo);
-//        NotificationDTO notifications = notificationService.findNotificationByCode(notificationNo);
-//        model.addAttribute("notifications", notifications);
-//
-//        return "/admin/detail";
-//    }
+    // 단일 조회 기능
+    @GetMapping("/{notificationNo}")
+    public String findMenuByCode(@PathVariable("notificationNo") int notificationNo, Model model) {
 
+        log.info("notification : {}", notificationNo);
+        NotificationDTO notification = notificationService.findNotificationByCode(notificationNo);
+        model.addAttribute("notification", notification);
+
+        return "/admin/detail";
+    }
+
+//    @GetMapping("/notificationmodify/{notificaitonNo}")
+//    public String modifyPage(@PathVariable int notificationNo, Model model) {
+//
+//        log.info("menuCode = {}", notificationNo);
+//
+//        // 메뉴코드로 메뉴 조회해오는 기능
+//        NotificationDTO notification = notificationService.findMenuByCode(notificationNo);
+//
+//        model.addAttribute("notification", notification);
+//
+//        return "admin/notificationmodify";
+//    }
+//
+//
+//    @PostMapping("/notificationmodify")
+//    // ModelAttribute 생략가능
+//    public String modifyMenu(NotificationDTO modifyNotification) {
+//
+//        log.info("modifyMenu =========== {}", modifyNotification);
+//
+//        notificationService.modifyNotification(modifyNotification);
+//
+//        return "redirect:/notification/modify/" + modifyNotification.getNotificationNo();
+//    }
 
 
 
