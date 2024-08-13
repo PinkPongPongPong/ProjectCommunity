@@ -2,8 +2,8 @@ package com.ohgiraffers.projectgin.auth.service;
 
 
 import com.ohgiraffers.projectgin.auth.principal.AuthPrincipal;
-import com.ohgiraffers.projectgin.model.entity.MemberEntity;
-import com.ohgiraffers.projectgin.model.repository.MemberRepository;
+import com.ohgiraffers.projectgin.model.entity.UserEntity;
+import com.ohgiraffers.projectgin.model.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

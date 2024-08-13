@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>detail</title>
+</head>
+
+<body>
+<button type="button" onclick="location.href='/admin/notification/modify'">수정하기</button>
+
+<table border="1">
+    <tr>
+        <th>no</th>
+        <th>제목</th>
+        <th>내용</th>
+        <th>날짜</th>
+    </tr>
+
+    <tbody>
+    <td th:text="${notification.notificationNo}"></td>
+    <td th:text="${notification.notificationTitle}"></td>
+    <td th:text="${notification.notificationContent}"></td>
+    <td th:text="${notification.notificationDate}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

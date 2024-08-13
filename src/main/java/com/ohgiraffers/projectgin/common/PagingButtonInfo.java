@@ -8,7 +8,9 @@ import lombok.*;
 @Setter
 @ToString
 public class PagingButtonInfo {
-    private int startPage;
+
     private int currentPage;
+    private int startPage;
     private int endPage;
+
 }

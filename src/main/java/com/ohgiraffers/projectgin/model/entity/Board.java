@@ -1,5 +1,6 @@
 package com.ohgiraffers.projectgin.model.entity;
 
+import java.lang.reflect.Member;
 import java.sql.Date;
 
 import jakarta.persistence.*;

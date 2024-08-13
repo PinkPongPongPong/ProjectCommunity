@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="tbl_comment_upvote")
+@Table(name="comment_upvote")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor

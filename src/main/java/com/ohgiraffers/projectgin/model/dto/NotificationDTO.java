@@ -2,16 +2,18 @@ package com.ohgiraffers.projectgin.model.dto;
 
 import lombok.*;
 
+import java.time.LocalDate;
+
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
+@Builder
 @Getter
+@Setter
 @ToString
 public class NotificationDTO {
     private int notificationNo;
-    private String adminNo;
     private String notificationTitle;
     private String notificationContent;
-    private String notificationDate;
-    private String notificationCount;
+    private LocalDate notificationDate;
+    private int notificationCount;
 }
