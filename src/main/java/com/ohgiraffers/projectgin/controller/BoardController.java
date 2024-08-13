@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -138,7 +139,7 @@ public class BoardController {
     }
 
     @GetMapping("/list")
-    public String findAllTable(@PageableDefault Pageable pageable, Model model) {
+    public String findAllTable(@PageableDefault(sort = "postDate", direction = Sort.Direction.DESC) Pageable pageable, Model model) {
 
         log.info("pageable = {}", pageable);
         Page<BoardDTO> boardList = boardService.findAllBoard(pageable);
