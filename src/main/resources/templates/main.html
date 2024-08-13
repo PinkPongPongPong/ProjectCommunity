@@ -424,13 +424,9 @@
             width: 300px;
         }
     </style>
-
-
 </head>
-
-<body>
 <header>
-    <img src="/templates/imeges/logo1.jfif" alt="Logo" class="header-logo">
+    <img src="/images/logo1.jfif" alt="Logo" class="header-logo">
     <div class="header-content">
         <div class="header-sitename">
             <h1><a href="사이트주소">FPS GUILD</a></h1>
@@ -438,7 +434,7 @@
         <div class="header-boardsUSER">
             <nav>
                 <ul>
-                    <li><a href="공지게시판 주소">공지게시판</a></li>
+                    <li><a href="/notification">공지게시판</a></li>
                     <li><a href="/templates/post/type/strategyboard">공략게시판</a></li>
                     <li><a href="/templates/post/type/freeboard">자유게시판</a></li>
                 </ul>
@@ -462,17 +458,18 @@
     </div>
 
 </header>
+<body>
 
 <div class="content-wrapper">
     <div class="main-content">
-        <article class="a1"><img src="/templates/imeges/article01.jpg" /></article>
+        <article class="a1"><img src="/images/article01.jpg" /></article>
 
         <article class="a2">
             <div class="image-container">
-                <img src="/templates/imeges/bestBoard.jpg" alt="Best Board" href="베스트게시판주소">
-                <img src="/templates/imeges/PlaythroughBoard.jpg" alt="Playthrough Board" href="공략게시판주소">
-                <img src="/templates/imeges/NotificationBoard.jpg" alt="Notification Board" href="공지게시판주소">
-                <img src="/templates/imeges/FreeBoard.jpg" alt="Free Board" href="자유게시판주소">
+                <img src="/images/bestBoard.jpg" alt="Best Board" href="베스트게시판주소">
+                <img src="/images/PlaythroughBoard.jpg" alt="Playthrough Board" href="공략게시판주소">
+                <img src="/images/NotificationBoard.jpg" alt="Notification Board" href="공지게시판주소">
+                <img src="/images/FreeBoard.jpg" alt="Free Board" href="자유게시판주소">
             </div>
         </article>
         <article class="a3">
@@ -647,7 +644,8 @@
 
     <div class="login-container">
         <div class="login">
-            <form class="login-form">
+            <form class="login-form" >
+                <div sec:authorize="isAnonymous()">
                 <label style="text-align: left">아이디</label>
                 <input type="text" name="userId" id="userId" placeholder="아이디" class="login-id">
 
@@ -655,7 +653,7 @@
                 <br>
                 <label style="text-align: left">비밀번호</label>
                 <input type="password" name="password" id="password" placeholder="비밀번호" class ="login-password">
-
+                </div>
                 <div style="margin-top: 10px;">
                     <a sec:authorize="isAnonymous()" th:href="@{/auth/login}"><button class="button-login" type="submit">로그인</button></a>
                     <a sec:authorize="isAnonymous()" th:href="@{/user/register}"><button class="button-signup" type="submit">회원가입</button></a>
@@ -683,7 +681,7 @@
 <footer>
     <div class="footer-content">
         <div class="footer-logo">
-            <img src="/templates/imeges/logo1.jfif">
+            <img src="/images/logo1.jfif">
         </div>
         <ul class="footer-links">
             <li><a href="#">FPS GUILD 소개</a></li>
@@ -702,5 +700,3 @@
 </body>
 
 </html>
-message.txt
-24KB
