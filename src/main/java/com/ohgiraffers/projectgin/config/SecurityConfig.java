@@ -1,6 +1,7 @@
 package com.ohgiraffers.projectgin.config;
 
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+import org.springframework.boot.web.servlet.filter.OrderedFormContentFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -34,7 +35,7 @@ public class SecurityConfig {
     // 기본적으로 제공하는 필터들이 있고, 커스첨 필터또한 적용 시킬 수 있다.
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, OrderedFormContentFilter formContentFilter) throws Exception {
         httpSecurity.authorizeHttpRequests((authorizationManagerRequestMatcherRegistry -> {
             authorizationManagerRequestMatcherRegistry
                     .requestMatchers("/","index.html").permitAll() // 모두에게 허용
@@ -58,6 +59,9 @@ public class SecurityConfig {
                     .logoutUrl("/auth/logout")
                     .logoutSuccessUrl("/");
         });
+        httpSecurity.csrf((csrfConfigurer-> {
+            csrfConfigurer.disable();
+        }));
         return httpSecurity.build();
     }
     @Bean

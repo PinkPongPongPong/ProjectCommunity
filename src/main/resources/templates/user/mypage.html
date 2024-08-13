@@ -81,6 +81,7 @@
         <form th:action="@{/user/modify}" method="post">
 
             <label>닉네임 : </label>
+
             <input type="text" name="memberNickName" id="memberNickName" >
 
             <label>전화번호 : </label>
@@ -88,6 +89,15 @@
 
             <label>이메일 : </label>
             <input type="text" name="email" id="email" >
+
+            <input type="text" name="memberNickName" id="memberNickName" required>
+
+            <label>전화번호 : </label>
+            <input type="text" name="phone" id="phone" required>
+            
+            <label>이메일 : </label>
+            <input type="text" name="email" id="email" required>
+
 
             <button type="submit">수정하기</button>
         </form>
