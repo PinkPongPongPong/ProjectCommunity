@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -95,7 +96,7 @@ public class BoardController {
         log.info("전달받은 BoardDTO : {} :",boardDTO);
 
         boardService.create(boardDTO, memberEntity);
-        return "/post/strategyregist";
+        return "redirect:/post/strategyregist";
     }
 
     @GetMapping("/{boardId}")
@@ -104,14 +105,14 @@ public class BoardController {
 
         model.addAttribute("board",board);
 
-        return "post/detail";
+        return "redirect:post/detail";
     }
 
     @GetMapping("/search")
     public String searchByTitle(@RequestParam("keyword") String keyword, Model model) {
         List<Board> results = boardService.searchByTitle(keyword);
         model.addAttribute("result", results);
-        return "/post/searchresults";
+        return "redirect:/post/searchresults";
     }
 
 
@@ -120,25 +121,25 @@ public class BoardController {
     public String searchByAuthor(@RequestParam("keyword") String keyword, Model model) {
         List<Board> results = boardService.searchByContent(keyword);
         model.addAttribute("result", results);
-        return "/post/searchresults"; // 템플릿 이름
+        return "redirect:/post/searchresults"; // 템플릿 이름
     }
 
     @GetMapping("/search")
     public String searchByContent(@RequestParam("keyword") String keyword, Model model) {
         List<Board> results = boardService.searchByContent(keyword);
         model.addAttribute("result", results);
-        return "/post/searchresults"; // 템플릿 이름
+        return "redirect:/post/searchresults"; // 템플릿 이름
     }
 
     @GetMapping("/search")
     public String searchByTitleOrContent(@RequestParam("titleOrContent") String keyword, Model model) {
         List<Board> results = boardService.searchByTitleOrContent(keyword,keyword);
         model.addAttribute("result", results);
-        return "/post/searchresults"; // 템플릿 이름
+        return "redirect:/post/searchresults"; // 템플릿 이름
     }
 
     @GetMapping("/list")
-    public String findAllTable(@PageableDefault Pageable pageable, Model model) {
+    public String findAllTable(@PageableDefault(sort = "postDate", direction = Sort.Direction.DESC) Pageable pageable, Model model) {
 
         log.info("pageable = {}", pageable);
         Page<BoardDTO> boardList = boardService.findAllBoard(pageable);
@@ -158,7 +159,7 @@ public class BoardController {
         model.addAttribute("paging", paging);
         model.addAttribute("boardList", boardList);
 
-        return "/post/boardlist";
+        return "redirect:/post/boardlist";
 
     }
 }
