@@ -61,7 +61,7 @@
 <div class="container">
     <div class="profile">
         <img src="https://i.namu.wiki/i/y7clENpMocBEWOSHHwcWP94zzdMDr1-x_lQ3CTJqDwKs0SZiRhovA3WKFPwr71jT6ghEytBPCtiNLFWpwMXPQw.webp" alt="프로필 사진" width="100" height="100">
-        <div sec:authorize="isAuthenticated()" class="profile-info">
+        <div class="profile-info">
             <p>[[ | ${ #authentication.principal.memberEntity.memberNickName } | ]]님 환영합니다. </p>
 
         </div>
@@ -74,12 +74,27 @@
             <p>이메일 :[[ | ${ #authentication.principal.memberEntity.email } | ]]</p>
         </ul>
     </div>
-    <button onclick="location.href">메인</button>
-</div>
+<!--    <button onclick="location.href">메인</button>-->
+    <a th:href="@{/user/main}">MainPage</a>
+    <div>
+        <h3>내 정보</h3>
+        <form th:action="@{/user/modify}" method="post">
 
+            <label>닉네임 : </label>
+            <input type="text" name="memberNickName" id="memberNickName" >
+
+            <label>전화번호 : </label>
+            <input type="text" name="phone" id="phone" >
+
+            <label>이메일 : </label>
+            <input type="text" name="email" id="email" >
+
+            <button type="submit">수정하기</button>
+        </form>
+    </div>
+</div>
 <div class="footer">
     &copy; 2024 My Page. All Rights Reserved.
 </div>
-
 </body>
 </html>
