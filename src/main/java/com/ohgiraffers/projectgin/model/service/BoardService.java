@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -26,18 +27,37 @@ public class BoardService {
     private final BoardCategoryRepository boardCategoryRepository;
 
 
-    public void create(BoardDTO boardDTO, MemberEntity memberEntity) {
-
-        Board board = Board.builder()
-                .title(boardDTO.getTitle())
-                .content(boardDTO.getContent())
-                .member(memberEntity)
-                .build();
-
-        Board saveBoard = boardRepository.save(board);
-
-        log.info("저장된 게시글 번호 : {}", saveBoard.getPostNo());
+    public List<BoardDTO> getAllBoards() {
+        List<Board> boards = boardRepository.findAll();
+        return boards.stream()
+                .map(board -> modelMapper.map(board, BoardDTO.class))
+                .collect(Collectors.toList());
     }
+
+    public BoardDTO getBoardById(int id) {
+        Board board = boardRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Board not found"));
+        return modelMapper.map(board, BoardDTO.class);
+    }
+
+    public BoardDTO create(BoardDTO boardDTO, MemberEntity memberEntity) {
+        Board board = modelMapper.map(boardDTO, Board.class);
+        board = boardRepository.save(board);
+        return modelMapper.map(board, BoardDTO.class);
+    }
+
+//    public void create(BoardDTO boardDTO, MemberEntity memberEntity) {
+//
+//        Board board = Board.builder()
+//                .title(boardDTO.getTitle())
+//                .content(boardDTO.getContent())
+//                .member(memberEntity)
+//                .build();
+//
+//        Board saveBoard = boardRepository.save(board);
+//
+//        log.info("저장된 게시글 번호 : {}", saveBoard.getPostNo());
+//    }
 
     public Board findBoardById(int boardId) {
         Board board = boardRepository.findById(boardId)
@@ -47,24 +67,24 @@ public class BoardService {
     }
 
 
-    public List<Board> searchByTitle(String title) {
-        return boardRepository.findByTitleContaining(title);
+    public List<Board> searchByTitle(String keyword) {
+        return boardRepository.findByTitleContaining(keyword);
     }
 
-    public List<Board> findByAuthorContaining(String author) {
-        return boardRepository.findByTitleContaining(author);
+
+    public List<Board> searchByAuthor(String keyword) {
+        return boardRepository.findByAuthorContaining(keyword);
     }
-    public List<Board> searchByContent(String content) {
-        return boardRepository.findByContentContaining(content);
+
+    public List<Board> searchByContent(String keyword) {
+        return boardRepository.findByContentContaining(keyword);
     }
-    public List<Board> searchByTitleOrContent(String keyword) {
-        return boardRepository.findByTitleContainingOrContentContaining(keyword, keyword);
+
+    public List<Board> searchByTitleOrContent(String title,String content) {
+        return boardRepository.findByTitleContainingOrContentContaining(title, content);
     }
 
     public Page<BoardDTO> findAllBoard(Pageable pageable) {
         return null;
     }
-
-//    public Page<BoardDTO> findAllBaord(Pageable pageable) {
-//    }
 }

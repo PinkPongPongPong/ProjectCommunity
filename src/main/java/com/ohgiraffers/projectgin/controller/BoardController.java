@@ -3,12 +3,14 @@ package com.ohgiraffers.projectgin.controller;
 import com.ohgiraffers.projectgin.common.Pagenation;
 import com.ohgiraffers.projectgin.common.PagingButtonInfo;
 import com.ohgiraffers.projectgin.model.dto.BoardDTO;
-import com.ohgiraffers.projectgin.model.dto.MemberSignupDTO;
 import com.ohgiraffers.projectgin.model.entity.Board;
 import com.ohgiraffers.projectgin.model.entity.MemberEntity;
 import com.ohgiraffers.projectgin.model.repository.BoardRepository;
+import com.ohgiraffers.projectgin.model.repository.CommentRepository;
 import com.ohgiraffers.projectgin.model.service.BoardService;
+import com.ohgiraffers.projectgin.model.service.CommentService;
 import com.ohgiraffers.projectgin.model.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,27 +26,32 @@ import java.nio.file.NoSuchFileException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/board")
+@RequestMapping("/api/boards")
 @Slf4j
+@RequiredArgsConstructor
 public class BoardController {
 
     @Autowired
     private final BoardService boardService;
+    private final CommentService commentService;
     private final MemberService memberService;
     private final BoardRepository boardRepository;
+    private final CommentRepository commentRepository;
 
-    public BoardController(MemberService memberService, BoardService boardService, BoardRepository boardRepository) {
-        this.memberService = memberService;
-        this.boardService = boardService;
-        this.boardRepository = boardRepository;
+//    public BoardController(MemberService memberService, BoardService boardService, BoardRepository boardRepository) {
+//        this.memberService = memberService;
+//        this.boardService = boardService;
+//        this.boardRepository = boardRepository;
+//    }
+
+    @GetMapping("/create/board")
+    public void createComment() {
+
     }
 
-    @GetMapping("/create")
-    public void createBoard() {
 
-    }
 
-    @PostMapping("/create")
+    @PostMapping("/create/board")
     public String postBoard(@AuthenticationPrincipal UserDetails userDetails, BoardDTO boardDTO) throws NoSuchFileException {
 
         String memberId = userDetails.getUsername();
@@ -54,7 +61,7 @@ public class BoardController {
         log.info("전달받은 BoardDTO : {} :",boardDTO);
 
         boardService.create(boardDTO, memberEntity);
-        return "/page/post/strategypage";
+        return "/post/strategyregist";
     }
 
     @GetMapping("/{boardId}")
@@ -65,34 +72,35 @@ public class BoardController {
 
         return "post/detail";
     }
+
     @GetMapping("/search")
-    public String searchByTitle(@RequestParam("keyword") String title, Model model) {
-        List<Board> results = boardService.searchByTitle(title);
+    public String searchByTitle(@RequestParam("keyword") String keyword, Model model) {
+        List<Board> results = boardService.searchByTitle(keyword);
         model.addAttribute("result", results);
-        return "searchResults";
+        return "/post/searchresults";
     }
 
 
 
     @GetMapping("/search")
     public String searchByAuthor(@RequestParam("keyword") String keyword, Model model) {
-        List<Board> results = boardService.searchByTitleOrContent(keyword);
+        List<Board> results = boardService.searchByContent(keyword);
         model.addAttribute("result", results);
-        return "searchResults"; // 템플릿 이름
+        return "/post/searchresults"; // 템플릿 이름
     }
 
     @GetMapping("/search")
     public String searchByContent(@RequestParam("keyword") String keyword, Model model) {
-        List<Board> results = boardService.searchByTitleOrContent(keyword);
+        List<Board> results = boardService.searchByContent(keyword);
         model.addAttribute("result", results);
-        return "searchResults"; // 템플릿 이름
+        return "/post/searchresults"; // 템플릿 이름
     }
 
     @GetMapping("/search")
-    public String searchByTitleOrContent(@RequestParam("keyword") String keyword, Model model) {
-        List<Board> results = boardService.searchByTitleOrContent(keyword);
+    public String searchByTitleOrContent(@RequestParam("titleOrcontent") String keyword, Model model) {
+        List<Board> results = boardService.searchByTitleOrContent(keyword,keyword);
         model.addAttribute("result", results);
-        return "searchResults"; // 템플릿 이름
+        return "/post/searchresults"; // 템플릿 이름
     }
 
     @GetMapping("/list")
@@ -116,7 +124,7 @@ public class BoardController {
         model.addAttribute("paging", paging);
         model.addAttribute("boardList", boardList);
 
-        return "page/post/list";
+        return "Boardlist";
 
     }
 }

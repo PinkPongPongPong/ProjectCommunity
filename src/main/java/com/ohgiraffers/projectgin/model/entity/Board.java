@@ -28,7 +28,7 @@ public class Board {
     private int postViews;
 
     @Column(name="post_upvote_count")
-    private int postUpdateCount;
+    private int postUpvoteCount;
 
     @Column(name="title", unique = true)
     private String title;

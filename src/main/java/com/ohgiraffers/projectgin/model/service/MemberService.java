@@ -10,6 +10,7 @@ import com.ohgiraffers.projectgin.model.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,6 +32,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final BoardRepository boardRepository;
+    private final ModelMapper modelMapper;
 
 
     @Transactional
@@ -81,6 +83,14 @@ public class MemberService {
         return member;
 
 
+    }
+
+    public MemberSignupDTO getUserInfo(int memberId) {
+        MemberEntity member = memberRepository.findById(Long.valueOf(memberId)).orElse(null);
+        if (member != null) {
+            return modelMapper.map(member, MemberSignupDTO.class);
+        }
+        return null;
     }
 }
 

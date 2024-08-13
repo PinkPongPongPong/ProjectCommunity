@@ -12,6 +12,9 @@ import java.sql.Date;
 public class CommentDTO {
     private int commentNo;
     private String userNickname;
-    private Date commentCate;
+    private Date commentDate;
     private int commentUpvoteCount;
+    private String comment;
+    private int boardNo;
+    private int memberNo;
 }

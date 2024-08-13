@@ -3,28 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>list</title>
+
 </head>
 <body>
-<table>
-    <tr>
-        <th>글번호</th>
-        <th>구분</th>
-        <th>제목</th>
-        <th>작성일</th>
-        <th>글쓴이</th>
-        <th>조회수</th>
-        <th>주천수</th>
-    </tr>
-    <tr th:each=" post : ${postList}">
-    <td th:text="${post.postNo}"></td>
-    <td th:text="${post.postCategory}"></td>
-    <td th:text="${post.postTitle}"></td>
-    <td th:text="${post.postDate}"></td>
-    <td th:text="${post.boardNickname}"></td>
-    <td th:text="${post.boardViewCount}"></td>
-    <td th:text="${post.boardUpvoteCount}"></td>
-    </tr>
+<th:blcok th:flagment="boardListFragment">
+<style>
+    .main-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        margin-bottom: 50px; /* 푸터와의 간격 */
+    }
 
+    .main-table {
+        width: 100%;
+        max-width: 1200px;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    .main-table th, .main-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .main-table th {
+        background-color: #f2f2f2;
+    }
+</style>
+<table class="main-table">
+    <thead>
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>조회수</th>
+        <th>추천수</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="board : ${boards}">
+        <td th:text="${board.postNo}"></td>
+        <td>
+            <a th:href="@{/board/{id}(id=${board.postNo})}" th:text="${board.title}"></a>
+        </td>
+        <td th:text="${board.memberNickname}"></td>
+        <td th:text="${#dates.format(board.postDate, 'yyyy-MM-dd')}"></td>
+        <td th:text="${board.postViews}"></td>
+        <td th:text="${board.postUpvoteCount}"></td>
+    </tr>
+    </tbody>
 </table>
 
 <div id="paging">
@@ -58,5 +89,7 @@
     <button th:onclick="'location.href=\'/post/list?page=' + ${ paging.endPage}  + '\''">
     </button>
 </div>
+</th:blcok>
 </body>
+
 </html>

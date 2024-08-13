@@ -1,5 +1,6 @@
 package com.ohgiraffers.projectgin.model.dto;
 
+import com.ohgiraffers.projectgin.model.entity.BoardCategory;
 import lombok.*;
 
 @NoArgsConstructor
@@ -11,4 +12,6 @@ public class BoardCategoryDTO {
 
     private int boardCategoryNo;
     private String boardCategory;
+
+
 }

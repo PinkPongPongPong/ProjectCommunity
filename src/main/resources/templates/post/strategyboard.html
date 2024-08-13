@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="boardList :: boardListFragment"></div>
+<main>
+
+    <table>
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>글쓴이</th>
+            <th>등록일</th>
+            <th>조회</th>
+            <th>추천</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>일반 게시판</td>
+            <td>김철수</td>
+            <td>2024-08-05</td>
+            <td>1111</td>
+            <td>102</td>
+        </tr>
+        <!-- 추가 행들 -->
+        </tbody>
+    </table>
+
+    <div class="image-buttons">
+        <button>벨벳</button>
+        <button>구찌</button>
+        <button>매직컬</button>
+        <button>거울물</button>
+        <button>율마이</button>
+        <button>초코헤이즐넛</button>
+        <button>랑데뷰</button>
+    </div>
+
+    <div class="pagination">
+        <a href="#">&lt;</a>
+        <a href="#">11</a>
+        <a href="#">12</a>
+        <a href="#">13</a>
+        <a href="#">14</a>
+        <a href="#">15</a>
+        <a href="#">16</a>
+        <a href="#">17</a>
+        <a href="#">18</a>
+        <a href="#">19</a>
+        <a href="#">20</a>
+        <a href="#">&gt;</a>
+    </div>
+
+    <div class="search">
+        <select>
+            <option>제목+본문</option>
+        </select>
+        <input type="text" placeholder="검색어를 입력하세요">
+        <button>검색</button>
+    </div>
+</main>
+</body>
+</html>
