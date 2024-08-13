@@ -25,14 +25,14 @@ public class CommentController {
         return commentService.getCommentsByBoardId(boardNo);
     }
 
-    @PutMapping("/{commentNo")
-    public CommentDTO updateComment(@PathVariable int commentNo, @RequestBody CommentDTO commentDTO) {
-        return commentService.updateComment(commentNo, commentDTO);
-    }
-
-    @DeleteMapping("/{commentNo}")
-    public void deleteComment(@PathVariable int commentNo) {
-        commentService.deleteComment(commentNo);
-    }
+//    @PutMapping("/{commentNo")
+//    public CommentDTO updateComment(@PathVariable int commentNo, @RequestBody CommentDTO commentDTO) {
+//        return commentService.updateComment(commentNo, commentDTO);
+//    }
+//
+//    @DeleteMapping("/{commentNo}")
+//    public void deleteComment(@PathVariable int commentNo) {
+//        commentService.deleteComment(commentNo);
+//    }
 
 }

@@ -18,6 +18,7 @@ public class MemberEntity {
     private int memberNo;
     private String memberId;
     private String password;
+    @Column(name ="member_nickname", unique = true)
     private String memberNickName;
     private String name;
     private String phone;
@@ -27,6 +28,7 @@ public class MemberEntity {
     private int susCount;
     @Enumerated(EnumType.STRING)
     private RoleType role;
+
 
 
 }

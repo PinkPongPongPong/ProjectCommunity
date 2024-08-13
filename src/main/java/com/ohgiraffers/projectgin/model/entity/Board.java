@@ -36,8 +36,6 @@ public class Board {
     @Column(name="content")
     private String content;
 
-    @Column(name="member_nickname", unique = true)
-    private String memberNickname;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "member_no")
@@ -51,5 +49,16 @@ public class Board {
     @JoinColumn(name = "post_category")
     private PostCategory postCategory;
 
+
+    public String getMemberNickname(Board board) {
+        return board.getMember() != null ? board.getMember().getMemberNickName() : null;
+    }
+
+    public Board getBoardWithMember(int boardId) {
+        EntityManager entityManager = null;
+        return entityManager.createQuery("SELECT b FROM Board b JOIN FETCH b.member WHERE b.postNo = :boardId", Board.class)
+                .setParameter("boardId", boardId)
+                .getSingleResult();
+    }
 
 }

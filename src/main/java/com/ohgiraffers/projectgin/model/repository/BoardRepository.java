@@ -3,11 +3,13 @@ package com.ohgiraffers.projectgin.model.repository;
 import com.ohgiraffers.projectgin.model.entity.Board;
 import com.ohgiraffers.projectgin.model.entity.BoardCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
+@EnableJpaRepositories
 public interface BoardRepository extends JpaRepository<Board, Integer> {
     // 제목으로 검색
     List<Board> findByTitleContaining(String title);

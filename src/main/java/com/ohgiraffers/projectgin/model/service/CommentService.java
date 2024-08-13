@@ -42,9 +42,11 @@ public class CommentService {
 //        existingComment.(commentDTO.getComment());
 //
 //    }
+//
+//
+//    public void deleteComment(int commentNo) {
+//
+//    }
 
 
-    public void deleteComment(int commentNo) {
-
-    }
 }

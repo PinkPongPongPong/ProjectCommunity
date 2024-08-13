@@ -123,7 +123,7 @@ public class BoardController {
     }
 
     @GetMapping("/search")
-    public String searchByTitleOrContent(@RequestParam("titleOrcontent") String keyword, Model model) {
+    public String searchByTitleOrContent(@RequestParam("titleOrContent") String keyword, Model model) {
         List<Board> results = boardService.searchByTitleOrContent(keyword,keyword);
         model.addAttribute("result", results);
         return "/post/searchresults"; // 템플릿 이름

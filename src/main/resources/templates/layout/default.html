@@ -3,26 +3,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-
-
     <title>default</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
 
-    <style>
-
-    </style>
 </head>
 <body>
 
-<div th:replace="fragment/mainstyle :: mainstyle"></div>
+<div th:replace=~/fragment/header :: header></div>
 
-<div th:replace="fragment/sidebar :: sidebar "></div>
+<div th:replace=~/fragment/sidebar :: sidebar></div>
 
-<div th:replace="fragment/header :: header"></div>
+<div th:replace=~/fragment/header :: login></div>
 
-<div th:replace="fragment/footer :: footer"></div>
-
-
-
+<div th:replace=~/fragment/footer :: footer></div>
 
 
 </body>
