@@ -46,37 +46,37 @@ public class UserController {
     public void mypage() {
     }
 
-@PostMapping("/modify")
+    @PostMapping("/modify")
     public String updateMyPage(@ModelAttribute("member") MemberEntity memberEntity,
                                RedirectAttributes redirectAttributes) {
-    try {
-        // 현재 로그인한 사용자 정보 가져오기
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String loggedInUserId = ((UserDetails) authentication.getPrincipal()).getUsername();
+        try {
+            // 현재 로그인한 사용자 정보 가져오기
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String loggedInUserId = ((UserDetails) authentication.getPrincipal()).getUsername();
 
-        // 로그인한 사용자 ID로 회원 정보 조회
-        MemberEntity existingMemberEntity = memberService.findMemberById(loggedInUserId);
+            // 로그인한 사용자 ID로 회원 정보 조회
+            MemberEntity existingMemberEntity = memberService.findMemberById(loggedInUserId);
 
-        // 기존 정보를 업데이트할 값으로 변경
-        existingMemberEntity.setMemberNickName(memberEntity.getMemberNickName());
-        existingMemberEntity.setPhone(memberEntity.getPhone());
-        existingMemberEntity.setEmail(memberEntity.getEmail());
+            // 기존 정보를 업데이트할 값으로 변경
+            existingMemberEntity.setMemberNickName(memberEntity.getMemberNickName());
+            existingMemberEntity.setPhone(memberEntity.getPhone());
+            existingMemberEntity.setEmail(memberEntity.getEmail());
 
-        // 회원 정보 업데이트
-        memberService.updateMemberInfo(existingMemberEntity);
+            // 회원 정보 업데이트
+            memberService.updateMemberInfo(existingMemberEntity);
 
-        // 성공 시 마이페이지로 리다이렉트
-        return "redirect:/user/mypage";
-    } catch (Exception e) {
-        // 오류 발생 시 에러 페이지로 리다이렉트
-        redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-        return "redirect:/user/mypage?error=true";
+            // 성공 시 마이페이지로 리다이렉트
+            return "redirect:/user/mypage";
+        } catch (Exception e) {
+            // 오류 발생 시 에러 페이지로 리다이렉트
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            return "redirect:/user/mypage?error=true";
+        }
     }
-}
 
     @GetMapping("/main")
     public String mainPage(){ return "index"; }
 
-    }
+}
 
 

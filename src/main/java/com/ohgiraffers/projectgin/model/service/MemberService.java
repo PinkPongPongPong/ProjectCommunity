@@ -32,7 +32,12 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
+    private final BoardRepository boardRepository;
+    private final ModelMapper modelMapper;
+
+
     @Transactional(readOnly = false)
+
     public void register(MemberSignupDTO signupDTO) {
         MemberEntity memberEntity = MemberEntity.builder()
                     .memberId(signupDTO.getMemberId())
@@ -115,8 +120,16 @@ public class MemberService {
 
         return member;
 
+
     }
 
+    public MemberSignupDTO getUserInfo(int memberId) {
+        MemberEntity member = memberRepository.findById((memberId)).orElse(null);
+        if (member != null) {
+            return modelMapper.map(member, MemberSignupDTO.class);
+        }
+        return null;
+    }
 }
 
 

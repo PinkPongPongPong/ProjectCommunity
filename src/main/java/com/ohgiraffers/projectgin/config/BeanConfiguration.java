@@ -7,10 +7,9 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class BeanConfiguration {
-//    @Bean
-//    public ModelMapper modelMapper() {
-//
-//        return modelMapper();
-//    }
 
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();  // 기본 설정으로 빈을 반환
+    }
 }

@@ -4,17 +4,14 @@ import java.lang.reflect.Member;
 import java.sql.Date;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name="tbl_board")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Setter
 public class Board {
 
     @Id
@@ -44,22 +41,12 @@ public class Board {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name = "board_category")
-    private BoardCategory BoardCategory;
+    private BoardCategory boardCategory;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name = "post_category")
     private PostCategory postCategory;
 
 
-    public String getMemberNickname(Board board) {
-        return board.getMember() != null ? board.getMember().getMemberNickName() : null;
-    }
-
-    public Board getBoardWithMember(int boardId) {
-        EntityManager entityManager = null;
-        return entityManager.createQuery("SELECT b FROM Board b JOIN FETCH b.member WHERE b.postNo = :boardId", Board.class)
-                .setParameter("boardId", boardId)
-                .getSingleResult();
-    }
 
 }
