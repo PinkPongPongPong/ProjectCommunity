@@ -23,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.NoSuchFileException;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -39,16 +40,23 @@ public class BoardController {
     private final CommentRepository commentRepository;
 
 
+    @GetMapping("/create/board")
+    public void createComment() {
+
+    }
+
+    @GetMapping("/strategy")
+    public String getStrategyBoard(Model model) {
+        List<String> categories = Arrays.asList("battlegrounds", "callofduty", "csonline");
+        model.addAttribute("categories", categories);
+        return "strategyboard";
+    }
     @GetMapping("/{category}/post/{id}")
     public String viewPost(@PathVariable String category, @PathVariable int id, Model model) {
         BoardDTO board = boardService.findById(id);
         model.addAttribute("board", board);
         model.addAttribute("category", category);
         return "board/view";
-    }
-    @GetMapping("/create/board")
-    public void createComment() {
-
     }
 
 
@@ -61,7 +69,7 @@ public class BoardController {
     @GetMapping("/board/{category}/post/{id}")
     public String getPostById(@PathVariable String category, @PathVariable int id, Model model) {
         model.addAttribute("post", boardService.findById(id));
-        return "board/post";
+        return "board/  ";
     }
 
     @PostMapping("/board/{category}/post")
@@ -150,7 +158,7 @@ public class BoardController {
         model.addAttribute("paging", paging);
         model.addAttribute("boardList", boardList);
 
-        return "Boardlist";
+        return "/post/boardlist";
 
     }
 }
