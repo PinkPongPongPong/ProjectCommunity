@@ -50,27 +50,27 @@ public class BoardController {
     public String getStrategyBoard(Model model) {
         List<String> categories = Arrays.asList("battlegrounds", "callofduty", "csonline");
         model.addAttribute("categories", categories);
-        return "strategyboard";
+        return "/post/strategyboard";
     }
     @GetMapping("/{category}/post/{id}")
     public String viewPost(@PathVariable String category, @PathVariable int id, Model model) {
         BoardDTO board = boardService.findById(id);
         model.addAttribute("board", board);
         model.addAttribute("category", category);
-        return "board/view";
+        return "/post/view";
     }
 
 
     @GetMapping("/board/{category}")
     public String getBoardByCategory(@PathVariable String category, Model model) {
         model.addAttribute("boards", boardService.findByCategory(category));
-        return "board/board";
+        return "post/categorylist";
     }
 
     @GetMapping("/board/{category}/post/{id}")
     public String getPostById(@PathVariable String category, @PathVariable int id, Model model) {
         model.addAttribute("post", boardService.findById(id));
-        return "board/  ";
+        return "board/";
     }
 
     @PostMapping("/board/{category}/post")
@@ -108,7 +108,7 @@ public class BoardController {
         return "redirect:post/detail";
     }
 
-    @GetMapping("/search")
+    @GetMapping("/search1")
     public String searchByTitle(@RequestParam("keyword") String keyword, Model model) {
         List<Board> results = boardService.searchByTitle(keyword);
         model.addAttribute("result", results);
@@ -117,21 +117,21 @@ public class BoardController {
 
 
 
-    @GetMapping("/search")
+    @GetMapping("/search2")
     public String searchByAuthor(@RequestParam("keyword") String keyword, Model model) {
         List<Board> results = boardService.searchByContent(keyword);
         model.addAttribute("result", results);
         return "redirect:/post/searchresults"; // 템플릿 이름
     }
 
-    @GetMapping("/search")
+    @GetMapping("/search3")
     public String searchByContent(@RequestParam("keyword") String keyword, Model model) {
         List<Board> results = boardService.searchByContent(keyword);
         model.addAttribute("result", results);
         return "redirect:/post/searchresults"; // 템플릿 이름
     }
 
-    @GetMapping("/search")
+    @GetMapping("/search4")
     public String searchByTitleOrContent(@RequestParam("titleOrContent") String keyword, Model model) {
         List<Board> results = boardService.searchByTitleOrContent(keyword,keyword);
         model.addAttribute("result", results);
