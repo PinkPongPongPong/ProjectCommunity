@@ -18,7 +18,6 @@ FPS 라는 대중적인 장르의 대표적인 게임을 주축으로 더 다양
 ### ⚙️ `개발 환경`
 
 - CSS . Html . java . JavaScript . Spring Framework . Thymeleaf . MySql
-![image](https://github.com/user-attachments/assets/f03a46b5-bfcb-42c3-abcb-17cda8178c67)
 
 ### 📂 `패키지구조`
 +---java
