@@ -20,6 +20,7 @@ FPS 라는 대중적인 장르의 대표적인 게임을 주축으로 더 다양
 - CSS . Html . java . JavaScript . Spring Framework . Thymeleaf . MySql
 
 ### 📂 `패키지구조`
+```
 |   text
 |   
 +---java
@@ -173,7 +174,7 @@ FPS 라는 대중적인 장르의 대표적인 게임을 주축으로 더 다양
         \---user
                 mypage.html
                 signup.html
-                
+  ```              
     
 ## 📌 주요 기능
 ###  🖱️ 공지사항
