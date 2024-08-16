@@ -172,6 +172,14 @@ FPS 라는 대중적인 장르의 대표적인 게임을 주축으로 더 다양
                 mypage.html
                 signup.html
                 
+ding text…]()
+
+        |               main.js
+        |               
+        \---user
+                mypage.html
+                signup.html
+                
 ## 📌 주요 기능
 ###  🖱️ 공지사항
 - 1. html화면에서 라우터를 거쳐서 데이터베이스에 입력하고, 입력된 데이터베이스를 화면에 출력
